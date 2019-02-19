@@ -1,11 +1,18 @@
 {
-  "name": "frontend",
+  "name": "shoppinglist",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "antd": "^3.13.2",
+    "axios": "^0.18.0",
+    "es6-promise": "^4.2.6",
+    "isomorphic-fetch": "^2.2.1",
     "react": "^16.8.1",
+    "react-axios": "^2.0.3",
     "react-dom": "^16.8.1",
-    "react-scripts": "2.1.5"
+    "react-router-dom": "^4.3.1",
+    "react-scripts": "2.1.5",
+    "uuid": "^3.3.2"
   },
   "scripts": {
     "start": "react-scripts start",
