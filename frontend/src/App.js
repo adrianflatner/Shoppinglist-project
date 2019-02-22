@@ -63,7 +63,7 @@ class App extends Component {
   }*/
   async addGrocery(title) {
     try {
-      axios.post('http://127.0.0.1:8000/api/',{
+      await axios.post('http://127.0.0.1:8000/api/',{
         title,
         completed: false})
       /*const newGrocery = await res.data();
