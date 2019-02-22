@@ -5,6 +5,8 @@ import Groceries from './components/Groceries';
 import AddGrocery from './components/AddGrocery';
 import About from './components/pages/About';
 import uuid from 'uuid';
+import axios from 'axios'
+
 
 import './App.css';
 
@@ -42,6 +44,7 @@ class App extends Component {
   }
 
   //Add grocery
+  /*
   addGrocery = (title) => {
     const newGrocery = {
       id: uuid.v4(),
@@ -49,6 +52,26 @@ class App extends Component {
       completed: false
     }
     this.setState({ groceries: [...this.state.groceries, newGrocery]})
+  }
+
+  addGrocery = (title) => {
+    axios.post('http://123.0.0.1:8000/api/', {
+      title,
+      completed: false
+    })
+    .then(res => this.setState({ groceries: [...this.state.groceries, res.data]}))
+  }*/
+  async addGrocery(title) {
+    try {
+      axios.post('http://127.0.0.1:8000/api/',{
+        title,
+        completed: false})
+      /*const newGrocery = await res.data();
+      this.setState({ groceries: [...this.state.groceries, newGrocery]});*/
+      .then(res => this.setState({ groceries: [...this.state.groceries, res.data]}))
+    } catch (e) {
+      console.log(e);
+    }
   }
 
   render() {
