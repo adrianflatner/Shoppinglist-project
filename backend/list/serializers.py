@@ -9,5 +9,6 @@ class ListSerializer(serializers.ModelSerializer):
             'id',
             'title',
             'description',
+            'groceries',
         )
         model = List

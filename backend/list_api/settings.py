@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'rest_framework.authtoken',
     'list_api',
     'list',
+    'groceries',
 ]
 
 REST_FRAMEWORK = {
@@ -67,7 +68,7 @@ MIDDLEWARE = [
 ]
 
 CORS_ORIGIN_ALLOW_ALL = True
-CORS_ORIGIN_WHITELIST = ('localhost:8000',)
+CORS_ORIGIN_WHITELIST = ('localhost:8000', 'localhost:3000/')
 ALLOWED_HOSTS = ['*']
 
 ROOT_URLCONF = 'list_api.urls'
