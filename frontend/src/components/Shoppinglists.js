@@ -93,7 +93,7 @@ class Shoppinglists extends Component{
             <p>
               <input placeholder="Name of list" onChange={(v) => this.updateTitle(v.target.value)}/>
               <input placeholder="Description" onChange={(v) => this.updateDescription(v.target.value)}/>
-              <button className="submit" onClick={() => this.handleSubmit()}>+</button>
+              <button className="submit" onClick={() => this.handleSubmit()}>Add list</button>
             </p>
           </div>
         </div>
