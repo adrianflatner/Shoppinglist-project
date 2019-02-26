@@ -1,0 +1,12 @@
+.grid {
+    display: grid;
+    grid-row-gap: 10px;
+}
+#login {
+    text-align: center;
+    display: block;
+    border-radius: 18px;
+}
+::-webkit-input-placeholder{
+    text-align: center;
+}

@@ -1,10 +1,16 @@
 import React, { Component } from 'react';
 //import logo from './logo.svg';
 import './App.css';
-import {Route} from 'react-router-dom';
+import {BrowserRouter, Route} from 'react-router-dom';
+
+//import components
 import NavBar from './components/NavBar';
-import ShoppingLists from './components/Shoppinglists';
-import Shoppinglist from './components/Shoppinglist';
+import Login from './components/LoginPage/Login';
+import Shoppinglist from './components/Lister/Shoppinglist';
+import {PrivateRoute} from './components/PrivateRoute';
+import Shoppinglists from './components/Lister/Shoppinglists';
+
+
 class App extends Component{
   handleLogin(username, password) {
     fetch('http://127.0.0.1:8000/api/', {
@@ -16,8 +22,13 @@ class App extends Component{
     return (
       <div>
       <NavBar/>
-        <Route exact path='/' component={ShoppingLists}/>
-        <Route exact path='/items/:id' component={Shoppinglist}/>
+      <BrowserRouter>
+        <div>
+          <PrivateRoute exact path='/' component={Shoppinglists}/>
+          <PrivateRoute exact path='/items/:id' component={Shoppinglist}/>
+          <Route path="/login" component={Login}/>
+        </div>
+      </BrowserRouter>
       </div>
     );
   }

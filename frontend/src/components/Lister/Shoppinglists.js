@@ -70,9 +70,9 @@ class Shoppinglists extends Component{
 
           </Link>
         ))}
-        <div>
-          <input onChange={(v) => this.updateTitle(v.target.value)}/>
-          <input onChange={(v) => this.updateDescription(v.target.value)}/>
+        <div className="grid">
+          <input placeholder="list name" className="grid-input " onChange={(v) => this.updateTitle(v.target.value)}/>
+          <input placeholder="list description" className="grid-input" onChange={(v) => this.updateDescription(v.target.value)}/>
           <p>{this.state.newItem.title}</p>
           <button onClick={() => this.handleSubmit()}>+</button>
 
