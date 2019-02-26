@@ -5,16 +5,18 @@ import './Shoppinglists.css';
 class Shoppinglists extends Component{
     state = {
       lists: [],
-      newItem: {title: "asdasda", description: ""}
+      newItem: {title: "", description: ""}
     };
   
     async _fetchList() {
       try{
         const res = await fetch('http://127.0.0.1:8000/api/');
-        const lists = await res.json();
-        this.setState({
-          lists
-        });
+        if (res.ok){ 
+          const lists = await res.json();
+          this.setState({
+            lists
+          });
+        }
       } catch (e) {
         console.log(e);
       }

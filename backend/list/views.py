@@ -11,16 +11,19 @@ from django.views.decorators.csrf import csrf_exempt
 from rest_framework.authtoken.models import Token
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.permissions import AllowAny
-from rest_framework import generics, viewsets
+from rest_framework import generics, viewsets, status
 from rest_framework.status import(
     HTTP_400_BAD_REQUEST,
     HTTP_404_NOT_FOUND,
     HTTP_200_OK
 )
 from rest_framework.response import Response
+from .serializers import UserSerializer
+from django.contrib.auth.models import User
 
+#login functions returning error messages
 @csrf_exempt
-@api_view(["POST"])
+@api_view(['POST'])
 @permission_classes((AllowAny,))
 def login(request):
     username = request.data.get("username")
@@ -38,7 +41,23 @@ def login(request):
     return Response({'token':token.key},
     status=HTTP_200_OK)
 
+@csrf_exempt
+@api_view(["GET"])
+def sample_api(request):
+    data = {'sample_data': 123}
+    return Response(data, status=HTTP_200_OK)
 
+@csrf_exempt
+@api_view(['POST'])
+@permission_classes((AllowAny,))
+def create_auth(request):
+    serialized = UserSerializer(data=request.data)
+    if serialized.is_valid(raise_exception=True):
+        serialized.save()
+        return Response(serialized.data, status = status.HTTP_201_CREATED)
+
+
+#generating  lists of listobjects
 class ShoppingList(generics.ListCreateAPIView):
     serializer_class = ListSerializer
     queryset = List.objects.all()
@@ -48,3 +67,5 @@ class DetailList(generics.RetrieveUpdateDestroyAPIView):
     queryset = List.objects.all()
 
 # Create your views here.
+
+# const user = await fetch('/api/register?format=json', { method: 'POST', body: JSON.stringify({ password: 'hei', username: 'klomp' }), headers: { 'Content-Type': 'application/json' } });
