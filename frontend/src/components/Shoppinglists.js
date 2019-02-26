@@ -37,6 +37,26 @@ class Shoppinglists extends Component{
 
     }
 
+    delList = (id) => {
+      this.setState({ lists: [...this.state.lists.filter(list => list.id !== id)]});
+      this.handleDelete(id);
+      
+    }
+
+    async handleDelete(id){
+      try{
+        const res = await fetch(`http://127.0.0.1:8000/api/${id}/`, {
+          method: 'DELETE',
+          headers: {"Content-Type": "application/json"}
+        });
+        if(res.ok){
+          await this._fetchList(); 
+        }
+      } catch (e) {
+        console.log(e);
+      }
+    }
+
     async handleSubmit(){
       try{
         const res = await fetch('http://127.0.0.1:8000/api/', {
@@ -59,22 +79,23 @@ class Shoppinglists extends Component{
 
         {this.state.lists.map(items => (
 
-          <Link key={items.id} to={`/items/${items.id}`}>
-
           <div className="listetittel">
+          <Link key={items.id} to={`/items/${items.id}`}>
             <h3 className="card-title">{items.title}</h3>
+          </Link>
+            <button className="xBtn" onClick={this.delList.bind(items,items.id)}>x</button>
             <p className="card-text">{items.description}</p>
           </div>
 
-          </Link>
+        
         ))}
         <div>
-          <input onChange={(v) => this.updateTitle(v.target.value)}/>
-          <input onChange={(v) => this.updateDescription(v.target.value)}/>
-          <p>{this.state.newItem.title}</p>
-          <button onClick={() => this.handleSubmit()}>+</button>
-
-        </div>
+            <p>
+              <input placeholder="Name of list" onChange={(v) => this.updateTitle(v.target.value)}/>
+              <input placeholder="Description" onChange={(v) => this.updateDescription(v.target.value)}/>
+              <button className="submit" onClick={() => this.handleSubmit()}>+</button>
+            </p>
+          </div>
         </div>
       )
     }
