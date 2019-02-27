@@ -5,6 +5,8 @@ import './Shoppinglists.css';
 class Shoppinglist extends Component{
     state = {
       lists: [],
+      listView: [],
+      groceries: [],
       newItem: {title: "", description: "", completed: false}
     };
     
@@ -21,8 +23,22 @@ class Shoppinglist extends Component{
       }
     }
 
+    async _fetchList2(id) {
+      try{
+        const res = await fetch(`http://127.0.0.1:8000/api/${id}/`);
+        const listView = await res.json();
+        this.setState({
+          listView: listView
+        });
+      } catch (e) {
+        console.log(e);
+      }
+    }
+
     async componentDidMount(){
       await this._fetchList();
+      await this._fetchList2(window.location.pathname.match(/\d+/)[0]);
+      this.groceryID();
     }
 
     updateTitle(title){
@@ -38,6 +54,10 @@ class Shoppinglist extends Component{
 
     }
 
+    foreignKey(id) {
+      this.state.listView.groceries.push(id);
+      this.handleForeignKey();
+    }
     
     markComplete = (id) => {
         this.setState({ lists: this.state.lists.map(grocery => {
@@ -56,6 +76,22 @@ class Shoppinglist extends Component{
     }
       
 
+    groceryID(){
+        var result = [];
+        this.state.lists.forEach(grocery => {
+          console.log(grocery);
+          this.state.listView.groceries.forEach(Id => {
+            console.log(Id);
+            if(grocery.id === Id){
+              result.push(grocery)
+            }
+          }
+        )})
+        this.setState({
+          groceries: result
+        });
+    }
+
     async handleDelete(id){
       try{
         const res = await fetch(`http://127.0.0.1:8000/api/groceries/${id}/`, {
@@ -64,6 +100,8 @@ class Shoppinglist extends Component{
         });
         if(res.ok){
           await this._fetchList(); 
+          await this._fetchList2(window.location.pathname.match(/\d+/)[0]);
+          this.groceryID();
         }
       } catch (e) {
         console.log(e);
@@ -79,6 +117,28 @@ class Shoppinglist extends Component{
         });
         if(res.ok){
           await this._fetchList(); 
+          await this._fetchList2(window.location.pathname.match(/\d+/)[0]);
+          this.groceryID();
+          this.foreignKey(this.state.lists.slice(-1)[0].id);
+        }
+      } catch (e) {
+        console.log(e);
+      }
+    
+    }
+
+    async handleForeignKey(){
+      try{
+        var id = window.location.pathname.match(/\d+/)[0];
+        const res = await fetch(`http://127.0.0.1:8000/api/${id}/`, {
+          body: JSON.stringify(this.state.listView),
+          method: 'PUT',
+          headers: {"Content-Type": "application/json"}
+        });
+        if(res.ok){
+          await this._fetchList(); 
+          await this._fetchList2(window.location.pathname.match(/\d+/)[0]);
+          this.groceryID();
         }
       } catch (e) {
         console.log(e);
@@ -95,6 +155,8 @@ class Shoppinglist extends Component{
         });
         if(res.ok){
           await this._fetchList(); 
+          await this._fetchList2(window.location.pathname.match(/\d+/)[0]);
+          this.groceryID();
         }
       } catch (e) {
         console.log(e);
@@ -107,6 +169,10 @@ class Shoppinglist extends Component{
       return(
         <div className="container">
           <div>
+            <h3>{this.state.listView.title}</h3>
+          </div>
+          <br/>
+          <div>
             <p>
               <input placeholder="New grocery" onChange={(v) => this.updateTitle(v.target.value)}/>
               <input placeholder="Description" onChange={(v) => this.updateDescription(v.target.value)}/>
@@ -114,14 +180,15 @@ class Shoppinglist extends Component{
             </p>
           </div>
           <br/>
-          {this.state.lists.map(items => (
+          {this.state.groceries.map(items => (
             <div className="listetittel">
               <p style={{textDecoration: items.completed ? 'line-through' : 'none'}} className="cardtitle">
-                <input type="checkbox" onChange={this.markComplete.bind(items,items.id)} />{' '}
+                <input name="checkbox" type="checkbox" onChange={this.markComplete.bind(items,items.id)} />{' '}
                 {items.title}
                 <button className="xBtn" onClick={this.delGrocery.bind(items,items.id)}>x</button>
               </p>
               <p className="card-text">{items.description}</p>
+              
             </div>
 
           ))}
