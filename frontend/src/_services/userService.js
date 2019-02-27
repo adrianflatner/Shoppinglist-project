@@ -50,7 +50,7 @@ export default class userService{
         console.log(headers,options,url);
         return fetch(url, {
             headers,
-            options
+            ...options
         })
         .then(this._checkStatus)
         .then(response => response.json())

@@ -8,7 +8,9 @@ class Shoppinglist extends Component{
 async componentDidMount(){
     try{
       const{match: { params }} = this.props;
-      const res = (await fetch(`http://127.0.0.1:8000/api/${params.id}/`));
+      const res = await fetch(`http://127.0.0.1:8000/api/${params.id}/`, {
+        headers: {'Authorization': "Token " + localStorage.getItem('id_token'), 'Content-Type':'application/json'},
+      });
       const list = await res.json();
       this.setState({
         list,
