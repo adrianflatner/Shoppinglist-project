@@ -46,8 +46,9 @@ class Shoppinglists extends Component{
 
     async handleSubmit(){
       try{
-        const res = await this.auth.fetch('http://127.0.0.1:8000/api/', {
+        const res = await fetch('http://127.0.0.1:8000/api/', {
           body: JSON.stringify(this.state.newItem),
+          headers: {'Authorization': "Token " + localStorage.getItem('id_token'), 'Content-Type':'application/json'},
           method: 'POST',
         });
         if(res.ok){
@@ -67,20 +68,19 @@ class Shoppinglists extends Component{
 
           <Link key={items.id} to={`/items/${items.id}`}>
 
-          <div className="listetittel">
-            <h3 className="card-title">{items.title}</h3>
-            <p className="card-text">{items.description}</p>
-          </div>
+            <div className="listetittel">
+              <h3 className="card-title">{items.title}</h3>
+              <p className="card-text">{items.description}</p>
+            </div>
 
           </Link>
-        ))}
-        <div className="grid">
-          <input placeholder="list name" className="grid-input " onChange={(v) => this.updateTitle(v.target.value)}/>
-          <input placeholder="list description" className="grid-input" onChange={(v) => this.updateDescription(v.target.value)}/>
-          <p>{this.state.newItem.title}</p>
-          <button onClick={() => this.handleSubmit()}>+</button>
-
-        </div>
+          ))}
+          <div className="grid">
+            <input placeholder="list name" className="grid-input " onChange={(v) => this.updateTitle(v.target.value)}/>
+            <input placeholder="list description" className="grid-input" onChange={(v) => this.updateDescription(v.target.value)}/>
+            <p>{this.state.newItem.title}</p>
+            <button onClick={() => this.handleSubmit()}>+</button>
+          </div>
         </div>
       )
     }

@@ -45,8 +45,8 @@ export default class userService{
             'Content-Type':'application/json'
         }
         if (this.loggedIn()){
+            headers['Authorization'] = 'Token ' + this.getToken()
         }
-        headers['Authorization'] = 'Token ' + this.getToken()
         console.log(headers,options,url);
         return fetch(url, {
             headers,
