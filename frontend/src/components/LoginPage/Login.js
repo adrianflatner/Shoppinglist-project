@@ -1,15 +1,71 @@
-import React from 'react'
+import React, {Component} from 'react'
 import './login.css';
-import login from '../../_services/userService'
+import userService from '../../_services/userService'
+class Login extends Component{
+    constructor(){
+        super();
+        this.handleChange = this.handleChange.bind(this);
+        this.handleFormSubmit = this.handleFormSubmit.bind(this);
+        this.Auth = new userService();
+        this.state = {
+            username: "",
+            password: ""
+        }
+    }
 
-function Login() {
-    return (
-        <div className="grid">
-            <h1>Login</h1>
-            <input className="grid-input"  placeholder="username"/>
-            <input className="grid-input"  placeholder="password" type = "password"/>
-            <button onClick="">Login</button>
-        </div>
-    )
+    componentWillMount(){
+        if(this.Auth.loggedIn()){
+         //   this.Auth.props.history.replace('/');
+        }
+    }
+
+    handleChange(e){
+        this.setState({
+            [e.target.name]: e.target.value
+        });
+    }
+
+    handleFormSubmit(e){
+        
+        this.Auth.login(this.state.username, this.state.password)
+        .then(res =>{
+            console.log(res);
+            //    this.props.history.replace('/');
+        })
+        .catch(err =>{
+            console.error(err);
+        })
+    }
+
+    render(){
+            return (
+            <div className="grid">
+                <h1>Login</h1>
+                <div>
+                    <input 
+                    className="grid-input" 
+                    name="username"
+                    type="text"
+                    placeholder="username"
+                    onChange={(...a) => this.handleChange(...a)}/>
+                    
+                    <input
+                    className="grid-input" 
+                    name="password" 
+                    type = "password"
+                    placeholder="password"
+                    onChange={(...a) => this.handleChange(...a)}/>
+                    
+                    <button
+                    className="submit-button"
+                    onClick={() => this.handleFormSubmit()}
+                    >
+                        Login
+                    </button>
+                </div>
+            </div>
+        )
+    }
 }
-export default Login
+
+export default Login;

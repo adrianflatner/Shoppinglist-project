@@ -1,22 +1,27 @@
 import React, { Component } from 'react';
 import {Link} from 'react-router-dom';
 import './Shoppinglists.css';
+import userService from '../../_services/userService';
 
 class Shoppinglists extends Component{
-    state = {
-      lists: [],
-      newItem: {title: "", description: ""}
-    };
-  
+    
+    constructor(props){
+      super(props);
+      this.state = {
+        lists: [],
+        newItem: {title: "", description: ""}
+      };
+      this.auth = new userService();
+    
+    }
+    
     async _fetchList() {
       try{
-        const res = await fetch('http://127.0.0.1:8000/api/');
-        if (res.ok){ 
-          const lists = await res.json();
-          this.setState({
-            lists
-          });
-        }
+        const lists = await this.auth.fetch('http://127.0.0.1:8000/api/');
+        console.log(lists)
+        this.setState({
+          lists
+        });
       } catch (e) {
         console.log(e);
       }
@@ -41,10 +46,9 @@ class Shoppinglists extends Component{
 
     async handleSubmit(){
       try{
-        const res = await fetch('http://127.0.0.1:8000/api/', {
+        const res = await this.auth.fetch('http://127.0.0.1:8000/api/', {
           body: JSON.stringify(this.state.newItem),
           method: 'POST',
-          headers: {"Content-Type": "application/json"}
         });
         if(res.ok){
           await this._fetchList(); 
