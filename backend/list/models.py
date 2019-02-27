@@ -5,6 +5,7 @@ from django.db import models
 
 from groceries.models import Grocery
 
+
 # Create your models here.
 class List(models.Model):
     title = models.CharField(max_length=200)

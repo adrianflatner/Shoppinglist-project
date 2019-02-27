@@ -9,6 +9,16 @@
     font-size: 20px;
 }
 
+.submit {
+    border: none;
+    background-color:  	#606060;
+    color: #fff;
+    padding:2px 40px;
+    font-size: 15px;
+    cursor: pointer;
+    
+  }
+
 .xBtn{
     background: #ff0000;
     color: #fff;

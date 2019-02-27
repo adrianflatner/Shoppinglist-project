@@ -19,6 +19,8 @@ from rest_framework.status import(
 )
 from rest_framework.response import Response
 
+from groceries.models import Grocery 
+
 @csrf_exempt
 @api_view(["POST"])
 @permission_classes((AllowAny,))
@@ -47,4 +49,7 @@ class DetailList(generics.RetrieveUpdateDestroyAPIView):
     serializer_class = ListSerializer
     queryset = List.objects.all()
 
+
+
 # Create your views here.
+
