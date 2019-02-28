@@ -9,6 +9,7 @@ import Login from './components/LoginPage/Login';
 import Shoppinglist from './components/Lister/Shoppinglist';
 import {PrivateRoute} from './components/PrivateRoute';
 import Shoppinglists from './components/Lister/Shoppinglists';
+import Signup from './components/SignupPage/signup';
 
 
 class App extends Component{

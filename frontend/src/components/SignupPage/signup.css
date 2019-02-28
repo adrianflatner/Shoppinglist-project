@@ -1,0 +1,73 @@
+body {font-family: Arial, Helvetica, sans-serif;}
+
+hr {
+  border: 1px solid #f1f1f1;
+  margin-bottom: 25px;
+}
+
+.grid {
+  display: grid;
+  grid-row-gap: 10px;
+  margin-left: 33%; 
+  margin-right: 33%;
+}
+
+.grid-input {
+  margin-top: 1px;
+  margin-bottom: 3px;
+}
+
+
+#firstname, #lastname {
+  float: left;
+  width: 50%;
+}
+
+#lastname {
+  margin-left: 1 px;
+}
+
+input[type=username], input[type=password],input[type=rpassword] {
+  width: 100%;
+  padding: 12px 20px;
+  margin-top: 1px;
+  margin-bottom: 8px;
+  display: inline-block;
+  border: 1px solid #f1f1f1;
+  box-sizing: border-box;
+  background: #f1f1f1;
+}
+
+
+input[type=username]:focus, input[type=password]:focus,input[type=rpassword]:focus {
+  background-color: #E8E8E8;
+  outline: none;
+}
+
+
+button {
+  background-color: #4CAF50;
+  color: white;
+  padding: 14px 20px;
+  margin: 8px 0;
+  border: none;
+  cursor: pointer;
+  width: 100%;
+  opacity: 0.9;
+}
+
+button:hover {
+  opacity:1;
+}
+
+/* Extra styles for the cancel button */
+.cancelbtn {
+  padding: 14px 20px;
+  background-color: #f44336;
+}
+
+/* Float cancel and signup buttons and add an equal width */
+.cancelbtn, .signupbtn {
+  float: left;
+  width: 50%;
+}
