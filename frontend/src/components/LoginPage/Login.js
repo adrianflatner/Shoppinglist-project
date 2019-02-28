@@ -42,6 +42,7 @@ class Login extends Component{
             <div className="grid">
                 <h1>Login</h1>
                 <div>
+                    <label for="uname"><b>Username</b></label>
                     <input 
                     className="grid-input" 
                     name="username"
@@ -49,6 +50,7 @@ class Login extends Component{
                     placeholder="username"
                     onChange={(...a) => this.handleChange(...a)}/>
                     
+                    <label for="pword"><b>Password</b></label>
                     <input
                     className="grid-input" 
                     name="password" 

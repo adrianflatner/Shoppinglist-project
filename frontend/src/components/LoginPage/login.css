@@ -26,7 +26,7 @@ button {
   }
 
 
-  input[type=username], input[type=password] {
+  .grid-input {
     width: 100%;
     padding: 12px 20px;
     margin: 8px 0;
@@ -34,13 +34,10 @@ button {
     border: 1px solid #ccc;
     box-sizing: border-box;
     border-radius: 0px;
-  }
-
-
-  input[type=username]:focus, input[type=password]:focus {
     background-color: #E8E8E8;
     outline: none;
   }
+
   
   button:hover {
     opacity: 0.8;
