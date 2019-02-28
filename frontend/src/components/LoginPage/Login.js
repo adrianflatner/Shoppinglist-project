@@ -15,7 +15,7 @@ class Login extends Component{
 
     componentWillMount(){
         if(this.Auth.loggedIn()){
-         //   this.Auth.props.history.replace('/');
+          this.Auth.props.history.replace('/');
         }
     }
 
@@ -30,7 +30,7 @@ class Login extends Component{
         this.Auth.login(this.state.username, this.state.password)
         .then(res =>{
             console.log(res);
-            //    this.props.history.replace('/');
+            this.props.history.replace('/');
         })
         .catch(err =>{
             console.error(err);

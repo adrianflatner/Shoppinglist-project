@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import {BrowserRouter as Router, Route} from 'react-router-dom';
+import {BrowserRouter as Router, withRouter} from 'react-router-dom';
 import './index.css';
 import App from './App';
 //import NavBar from './components/NavBar'
@@ -8,13 +8,12 @@ import Login from './components/LoginPage/Login';
 import * as serviceWorker from './serviceWorker';
 //import { from } from 'rxjs';
 
+const Root = withRouter(App)
+
 ReactDOM.render(
     <div>
         <Router>
-            <div>
-                <Route path="/" component={App}/>
-                <Route exact path="/login" component={Login}/>
-            </div>
+            <App />
         </Router>
     </div>
     , document.getElementById('root'));
