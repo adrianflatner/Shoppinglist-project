@@ -1,6 +1,8 @@
 import React, {Component} from 'react'
 import './login.css';
-import userService from '../../_services/userService'
+import userService from '../../_services/userService';
+import { Link } from 'react-router-dom';
+import Signup from '../SignupPage/Signup';
 class Login extends Component{
     constructor(){
         super();
@@ -38,11 +40,11 @@ class Login extends Component{
     }
 
     render(){
-            return (
+        return (
             <div className="grid">
                 <h1>Login</h1>
                 <div>
-                    <label for="uname"><b>Username</b></label>
+                    <label htmlFor="uname"><b>Username</b></label>
                     <input 
                     className="grid-input" 
                     name="username"
@@ -50,7 +52,7 @@ class Login extends Component{
                     placeholder="username"
                     onChange={(...a) => this.handleChange(...a)}/>
                     
-                    <label for="pword"><b>Password</b></label>
+                    <label htmlFor="pword"><b>Password</b></label>
                     <input
                     className="grid-input" 
                     name="password" 
@@ -65,7 +67,9 @@ class Login extends Component{
                         Login
                     </button>
                 </div>
+                <Link to={'/signup'} onClick={()=> Signup}>Signup here</Link>
             </div>
+
         )
     }
 }

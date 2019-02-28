@@ -9,7 +9,7 @@ import userServices from './_services/userService';
 import withAuth from './_services/withAuth';
 import Shoppinglist from './components/Lister/Shoppinglist';
 import Shoppinglists from './components/Lister/Shoppinglists';
-import Signup from './components/SignupPage/signup';
+import Signup from './components/SignupPage/Signup';
 
 const Auth = new userServices();
 class App extends Component{

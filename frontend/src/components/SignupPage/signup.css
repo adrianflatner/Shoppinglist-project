@@ -1,10 +1,5 @@
 body {font-family: Arial, Helvetica, sans-serif;}
 
-hr {
-  border: 1px solid #f1f1f1;
-  margin-bottom: 25px;
-}
-
 .grid {
   display: grid;
   grid-row-gap: 10px;
@@ -27,20 +22,21 @@ hr {
   margin-left: 1 px;
 }
 
-input[type=username], input[type=password],input[type=rpassword] {
+.text-input{
   width: 100%;
   padding: 12px 20px;
-  margin-top: 1px;
-  margin-bottom: 8px;
+  margin: 8px 0;
   display: inline-block;
-  border: 1px solid #f1f1f1;
+  border: 1px solid #ccc;
   box-sizing: border-box;
-  background: #f1f1f1;
+  border-radius: 0px;
+  background-color: #E8E8E8;
+  outline: none;
 }
 
 
-input[type=username]:focus, input[type=password]:focus,input[type=rpassword]:focus {
-  background-color: #E8E8E8;
+.text-input:focus {
+  background-color: #ddd;
   outline: none;
 }
 

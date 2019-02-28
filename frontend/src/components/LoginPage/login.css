@@ -38,6 +38,10 @@ button {
     outline: none;
   }
 
+  .grid-input:focus {
+    background-color: #ddd;
+    outline: none;
+  }
   
   button:hover {
     opacity: 0.8;
