@@ -2,7 +2,6 @@ import React, {Component} from 'react'
 import './login.css';
 import userService from '../../_services/userService';
 import { Link } from 'react-router-dom';
-import Signup from '../SignupPage/Signup';
 class Login extends Component{
     constructor(){
         super();

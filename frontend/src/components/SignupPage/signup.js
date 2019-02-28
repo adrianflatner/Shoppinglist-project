@@ -1,7 +1,15 @@
 import React, { Component } from 'react';
 import './Signup.css';
+import { Link } from 'react-router-dom';
 
-function Signup (){
+class Signup extends Component{
+
+
+  constructor(){
+    super();
+  }
+
+  render(){
     return (
         <div className="grid">
             <h1>Register</h1>
@@ -43,19 +51,26 @@ function Signup (){
             type = "rpassword"/>
             
             <div classname="button">
+            <Link to={'/login'} onClick={()=> this.Login}>
               <button 
               onClick="" 
               class="cancelbtn"> 
                   Cancel
               </button>
+              </Link>
+              
               <button 
               onClick="" 
               class="signupbtn"> 
                   Signup
               </button>
-            </div>   
+             
+            </div>  
+      
+        
         </div>
     );
-    }
+  }
+}
 export default Signup
 
