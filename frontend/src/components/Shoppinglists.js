@@ -67,6 +67,8 @@ class Shoppinglists extends Component{
         if(res.ok){
           await this._fetchList(); 
         }
+        document.getElementById("NewList").value=""
+        document.getElementById("Description").value=""
       } catch (e) {
         console.log(e);
       }
@@ -91,8 +93,8 @@ class Shoppinglists extends Component{
         ))}
         <div>
             <p>
-              <input placeholder="Name of list" onChange={(v) => this.updateTitle(v.target.value)}/>
-              <input placeholder="Description" onChange={(v) => this.updateDescription(v.target.value)}/>
+              <input placeholder="Name of list" id="NewList" onChange={(v) => this.updateTitle(v.target.value)}/>
+              <input placeholder="Description" id="Description"onChange={(v) => this.updateDescription(v.target.value)}/>
               <button className="submit" onClick={() => this.handleSubmit()}>Add list</button>
             </p>
           </div>
