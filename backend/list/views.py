@@ -10,7 +10,7 @@ from django.views.decorators.csrf import csrf_exempt
 
 from rest_framework.authtoken.models import Token
 from rest_framework.decorators import api_view, permission_classes
-from rest_framework.permissions import AllowAny
+from rest_framework.permissions import AllowAny, IsAuthenticated
 from rest_framework import generics, viewsets, status
 from rest_framework.status import(
     HTTP_400_BAD_REQUEST,
@@ -42,12 +42,6 @@ def login(request):
     status=HTTP_200_OK)
 
 @csrf_exempt
-@api_view(["GET"])
-def sample_api(request):
-    data = {'sample_data': 123}
-    return Response(data, status=HTTP_200_OK)
-
-@csrf_exempt
 @api_view(['POST'])
 @permission_classes((AllowAny,))
 def create_auth(request):
@@ -58,13 +52,17 @@ def create_auth(request):
 
 
 #generating  lists of listobjects
+@permission_classes((IsAuthenticated,))
 class ShoppingList(generics.ListCreateAPIView):
     serializer_class = ListSerializer
     queryset = List.objects.all()
+    permission_classes = (AllowAny,)
 
+@permission_classes((IsAuthenticated,))
 class DetailList(generics.RetrieveUpdateDestroyAPIView):
     serializer_class = ListSerializer
     queryset = List.objects.all()
+    permission_classes = (AllowAny,)
 
 # Create your views here.
 

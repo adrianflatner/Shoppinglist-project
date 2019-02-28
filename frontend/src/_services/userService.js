@@ -1,43 +1,70 @@
-import {authHeader} from '../_helpers/auth-header';
 
+export default class userService{
 
-export function login(username, password){
-    const requestOptions = {
-        method: 'POST',
-        headers: {'Content-Type':'application/json'},
-        body: JSON.stringify({username, password})
-    };
+    constructor(domain){
+        this.domain = domain || 'http://localhost:3000'
+        this.fetch = this.fetch.bind(this)
+        this.login = this.login.bind(this)
+    }
 
-    return fetch(`http://127.0.0.1:8000/api/login`, requestOptions)
-    .then(handleResponse)
-    .then(user => {
-        //if user is found
-        if (user){
-            //store user details in local storage to keep user logged in
-            localStorage.setItem('user', JSON.stringify(user));
+    login(username, password){
+        return this.fetch(`http://127.0.0.1:8000/api/login`, {
+            method:'POST',
+            headers: {
+                'Content-Type':'application/json'
+            },
+            body: JSON.stringify({
+                username,
+                password
+            })
+        }).then(res => {
+            this.setToken(res.token)
+            return Promise.resolve(res)
+        })
+    }
+
+    loggedIn(){
+        const token = this.getToken()
+        return !!token
+    }
+  
+    setToken(idToken){
+        localStorage.setItem('id_token', idToken)
+    }
+
+    getToken(){
+        return localStorage.getItem('id_token')
+    }
+
+    logout(){
+        localStorage.removeItem('id_token');
+    }
+
+    fetch (url, options){
+        const headers = {
+            'Content-Type':'application/json'
         }
-        return user;
-    })
-}
-
-export function logout(){
-    localStorage.removeItem('user');
-}
-
-
-function handleResponse(response){
-    return response.text().then(text => {
-        const data = text && JSON.parse(text);
-        if (!response.ok){
-            if  (response.status == 401){
-                logout();
-                window.location.reload(true);
-            }
-            const error = (data && data.message) || response.statusText;
-            return Promise.reject(error);
+        if (this.loggedIn()){
+            headers['Authorization'] = 'Token ' + this.getToken()
         }
-        return data;
-    })
+        console.log(headers,options,url);
+        return fetch(url, {
+            headers,
+            ...options
+        })
+        .then(this._checkStatus)
+        .then(response => response.json())
+    }
+
+    _checkStatus(response){
+        if(response.status >= 200 && response.status < 300){
+            return response
+        }else {
+            var error = new Error(response.statusText)
+            error.response = response
+            throw error
+        }
+    }
 }
 
 //const user = await fetch('/api/register?format=json', 
