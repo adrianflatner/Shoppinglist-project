@@ -29,13 +29,14 @@ button {
   .grid-input {
     width: 100%;
     padding: 12px 20px;
-    margin: 8px 0;
     display: inline-block;
     border: 1px solid #ccc;
     box-sizing: border-box;
     border-radius: 0px;
     background-color: #E8E8E8;
     outline: none;
+    margin-top: 0px;
+    margin-bottom: 25px;
   }
 
   .grid-input:focus {

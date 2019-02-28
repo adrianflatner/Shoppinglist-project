@@ -43,7 +43,7 @@ class Login extends Component{
             <div className="grid">
                 <h1>Login</h1>
                 <div>
-                    <label htmlFor="uname"><b>Username</b></label>
+                    <b>Username</b>
                     <input 
                     className="grid-input" 
                     name="username"
@@ -51,7 +51,7 @@ class Login extends Component{
                     placeholder="username"
                     onChange={(...a) => this.handleChange(...a)}/>
                     
-                    <label htmlFor="pword"><b>Password</b></label>
+                    <b>Password</b>
                     <input
                     className="grid-input" 
                     name="password" 
@@ -72,5 +72,4 @@ class Login extends Component{
         )
     }
 }
-
 export default Login;

@@ -14,14 +14,14 @@ class Signup extends Component{
         <div className="grid">
             <h1>Register</h1>
             <p> Please fill in this form to create an account.</p>
-            <label htmlFor="mail"><b>Email</b></label>
+            <b>Email</b>
             <input 
             className="text-input"  
             placeholder="email" 
             type="text"/>
 
 
-            <label htmlFor="uname"><b>Username</b></label>
+            <b>Username</b>
             <div classname="name">
               <input 
               className="text-input" 
@@ -36,15 +36,15 @@ class Signup extends Component{
               type="username"/>
             </div>
 
-            <label htmlFor="pword">
-              <b>Password</b>
-            </label>
+            
+            <b>Password</b>
+            
             <input 
             className="text-input"  
             placeholder="password" 
             type = "password"/>
 
-            <label htmlFor="rpword"><b>Repeat password</b></label>
+            <b>Repeat password</b>
             <input 
             className="text-input"  
             placeholder="repeat password" 
