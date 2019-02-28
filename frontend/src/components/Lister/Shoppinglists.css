@@ -1,0 +1,12 @@
+.listetittel {
+    display: gird;
+    border-bottom: 1px solid #ccc;
+    padding: 0;
+}
+.container{
+    margin-top: 10px;
+}
+
+.grid-input{
+    border-radius: 18px;
+}

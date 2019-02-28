@@ -1,0 +1,49 @@
+.grid {
+    display: grid;
+    grid-row-gap: 10px;
+    margin-left: 33%; 
+    margin-right: 33%;
+}
+
+#login {
+    text-align: center;
+    display: block;
+    border-radius: 18px;
+}
+
+::-webkit-input-placeholder{
+    text-align: center;
+}
+
+button {
+    background-color: #4CAF50;
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 8px 8px 0px;
+    border: none;
+    cursor: pointer;
+    width: 100%;
+  }
+
+
+  .grid-input {
+    width: 100%;
+    padding: 12px 20px;
+    display: inline-block;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+    border-radius: 0px;
+    background-color: #E8E8E8;
+    outline: none;
+    margin-top: 0px;
+    margin-bottom: 25px;
+  }
+
+  .grid-input:focus {
+    background-color: #ddd;
+    outline: none;
+  }
+  
+  button:hover {
+    opacity: 0.8;
+  }

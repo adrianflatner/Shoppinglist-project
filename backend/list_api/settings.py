@@ -39,20 +39,19 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 
     'rest_framework',
-    'corsheaders',
     'rest_framework.authtoken',
+    'corsheaders',
     'list_api',
     'list',
     'groceries',
 ]
 
 REST_FRAMEWORK = {
-    'DEFAULT_PERMISSION_CLASSES': (
-       # 'rest_framework.permissions.TokenAuthentication',
+        'DEFAULT_PERMISSION_CLASSES': (
+        'rest_framework.permissions.IsAuthenticated',
     ),
-    'DEFAULT_PERMISSION_CLASSES': (
-       # 'rest_framework.permissions.IsAuthenticated',
-        'rest_framework.permissions.AllowAny',
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework.authentication.TokenAuthentication',
     )
 }
 
@@ -65,11 +64,13 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'corsheaders.middleware.CorsMiddleware',
-    'django.middleware.common.CommonMiddleware',
 ]
 
 CORS_ORIGIN_ALLOW_ALL = True
-CORS_ORIGIN_WHITELIST = ('localhost:8000', 'localhost:3000/')
+CORS_ORIGIN_WHITELIST = (
+    'localhost:3000/',
+    'localhost:8000/',
+)
 ALLOWED_HOSTS = ['*']
 
 ROOT_URLCONF = 'list_api.urls'

@@ -5,6 +5,8 @@ from django.test import TestCase
 from .models import List
 
 # Create your tests here.
+
+#basic tests from tutorial
 class TodoModelTest(TestCase):
 
     @classmethod
