@@ -12,22 +12,6 @@ export default function withAuth(AuthComponent){
             }
         }
 
-        componentWillMount(){
-            if(!Auth.loggedIn()){
-                this.props.history.replace('/login')
-            }else{
-                try {
-                    this.setState({
-                        user: "Hello"
-                    })
-                }
-                catch(err){
-                    Auth.logout()
-                    this.props.history.replace('/login')
-                }
-            }
-        }
-
         render(){
             if(this.state.user){
                 return(
