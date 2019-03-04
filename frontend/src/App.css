@@ -33,3 +33,13 @@
     transform: rotate(360deg);
   }
 }
+
+.logout-button{
+  border: none;
+  background-color:  	#606060;
+  color: #fff;
+  padding:2px 40px;
+  font-size: 15px;
+  cursor: pointer;
+  float:right;
+}

@@ -7,6 +7,7 @@ function NavBar() {
         <nav className="navbar navbar-dark bg-primary fixed-top">
         <Link className="navbar-brand" to="/">
         Shopping List</Link>
+     
 
         </nav>
     );

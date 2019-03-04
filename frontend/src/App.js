@@ -9,7 +9,7 @@ import userServices from './_services/userService';
 import Shoppinglist from './components/Lister/Shoppinglist';
 import Shoppinglists from './components/Lister/Shoppinglists';
 import Login from './components/LoginPage/Login'
-import Signup from './components/SignupPage/signup';
+import Signup from './components/SignupPage/Signup';
 
 const Auth = new userServices();
 class App extends Component{
@@ -29,11 +29,11 @@ class App extends Component{
     return (
       <div>
         <NavBar/>
+        <button type="button" className="logout-button" onClick={this.handleLogout.bind(this)}>Logout</button>
         <Route exact path='/' component={Shoppinglists}/>
         <Route exact path="/login" component={Login}/>
         <Route exact path='/signup' component={Signup}/>
         <Route exact path='/items/:id' component={Shoppinglist}/>
-        <button type="button" className="submit-button" onClick={this.handleLogout.bind(this)}>Logout</button>
       </div>
     );
   }

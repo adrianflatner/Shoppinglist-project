@@ -1,27 +1,23 @@
 import React, { Component } from 'react';
-import './signup.css';
+import './Signup.css';
 import { Link } from 'react-router-dom';
 
+
+
 class Signup extends Component{
-
-
-  constructor(){
-    super();
-  }
-
   render(){
     return (
         <div className="grid">
             <h1>Register</h1>
             <p> Please fill in this form to create an account.</p>
-            <b>Email</b>
+            <label htmlFor="mail"><b>Email</b></label>
             <input 
             className="text-input"  
             placeholder="email" 
             type="text"/>
 
 
-            <b>Username</b>
+            <label htmlFor="uname"><b>Username</b></label>
             <div classname="name">
               <input 
               className="text-input" 
@@ -36,38 +32,34 @@ class Signup extends Component{
               type="username"/>
             </div>
 
-            
-            <b>Password</b>
-            
+            <label htmlFor="pword">
+              <b>Password</b>
+            </label>
             <input 
             className="text-input"  
             placeholder="password" 
             type = "password"/>
 
-            <b>Repeat password</b>
+            <label htmlFor="rpword"><b>Repeat password</b></label>
             <input 
             className="text-input"  
             placeholder="repeat password" 
-            type = "rpassword"/>
+            type = "password"/>
             
             <div classname="button">
-            <Link to={'/login'} onClick={()=> this.Login}>
+            <Link to={'/login'} onClick={()=> this.Login}>    
               <button 
               onClick="" 
               class="cancelbtn"> 
                   Cancel
               </button>
-              </Link>
-              
+            </Link>
               <button 
               onClick="" 
               class="signupbtn"> 
                   Signup
               </button>
-             
-            </div>  
-      
-        
+            </div>   
         </div>
     );
   }
