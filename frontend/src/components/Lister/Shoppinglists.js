@@ -54,7 +54,7 @@ class Shoppinglists extends Component{
       try{
         const res = await fetch(`http://127.0.0.1:8000/api/${id}/`, {
           method: 'DELETE',
-          headers: {"Content-Type": "application/json"}
+          headers: {'Authorization': "Token " + localStorage.getItem('id_token'), "Content-Type": "application/json"}
         });
         if(res.ok){
           await this._fetchList(); 
@@ -74,6 +74,8 @@ class Shoppinglists extends Component{
         if(res.ok){
           await this._fetchList(); 
         }
+        document.getElementById("Description").value=""
+        document.getElementById("NewList").value=""
       } catch (e) {
         console.log(e);
       }
@@ -98,8 +100,8 @@ class Shoppinglists extends Component{
         ))}
         <div>
             <p>
-              <input placeholder="Name of list" onChange={(v) => this.updateTitle(v.target.value)}/>
-              <input placeholder="Description" onChange={(v) => this.updateDescription(v.target.value)}/>
+              <input placeholder="Name of list" id="NewList" onChange={(v) => this.updateTitle(v.target.value)}/>
+              <input placeholder="Description" id="Description" onChange={(v) => this.updateDescription(v.target.value)}/>
               <button className="submit" onClick={() => this.handleSubmit()}>Add list</button>
             </p>
           </div>

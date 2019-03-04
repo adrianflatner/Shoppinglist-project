@@ -125,6 +125,8 @@ class Shoppinglist extends Component{
           this.groceryID();
           this.foreignKey(this.state.lists.slice(-1)[0].id);
         }
+        document.getElementById("NewGrocery").value=""
+        document.getElementById("Description").value=""
       } catch (e) {
         console.log(e);
       }
@@ -178,8 +180,8 @@ class Shoppinglist extends Component{
           <br/>
           <div>
             <p>
-              <input placeholder="New grocery" onChange={(v) => this.updateTitle(v.target.value)}/>
-              <input placeholder="Description" onChange={(v) => this.updateDescription(v.target.value)}/>
+              <input placeholder="New grocery" id="NewGrocery" onChange={(v) => this.updateTitle(v.target.value)}/>
+              <input placeholder="Description" id="Description"onChange={(v) => this.updateDescription(v.target.value)}/>
               <button className="submit"onClick={() => this.handleSubmit()}>Add Grocery</button>
             </p>
           </div>
