@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import {Link} from 'react-router-dom';
 import './Signup.css';
 
 class Signup extends Component{
@@ -15,7 +16,7 @@ class Signup extends Component{
 
 
             <label htmlFor="uname"><b>Username</b></label>
-            <div classname="name">
+            <div className="name">
               <input 
               className="text-input" 
               id="firstname" 
@@ -43,15 +44,15 @@ class Signup extends Component{
             placeholder="repeat password" 
             type = "rpassword"/>
             
-            <div classname="button">
+            <div className="button">
+            <Link to={'/login'} onClick={()=> this.Login}>    
               <button 
-              onClick="" 
-              class="cancelbtn"> 
+              className="cancelbtn"> 
                   Cancel
               </button>
+            </Link>
               <button 
-              onClick="" 
-              class="signupbtn"> 
+              className="signupbtn"> 
                   Signup
               </button>
             </div>   
