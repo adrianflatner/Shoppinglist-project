@@ -1,48 +1,70 @@
 import React, { Component } from 'react';
 import {Link} from 'react-router-dom';
+import userService from '../../_services/userService';
 import './Signup.css';
 
 class Signup extends Component{
+  constructor(){
+    super();
+    this.handleChange = this.handleChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
+    this.auth = new userService();
+    this.state = {
+      username: "",
+      password: ""
+    }
+  }
+
+  handleChange(e){
+    this.setState({
+      [e.target.name]: e.target.value
+    });
+  }
+
+  handleSubmit(e){
+    this.auth.register(this.state.username, this.state.password)
+    .then(res =>{
+      console.log(res);
+      this.props.history.replace('/login');
+    })
+    .catch(err=>{
+      console.error(err);
+    })
+  }
+
   render(){
     return (
         <div className="grid">
             <h1>Register</h1>
             <p> Please fill in this form to create an account.</p>
-            <label htmlFor="mail"><b>Email</b></label>
-            <input 
-            className="text-input"  
-            placeholder="email" 
-            type="text"/>
-
 
             <label htmlFor="uname"><b>Username</b></label>
             <div className="name">
               <input 
-              className="text-input" 
-              id="firstname" 
-              placeholder="firstname" 
-              type="username"/>
-              
-              <input 
-              className="text-input" 
-              id="lastname" 
-              placeholder="lastname" 
-              type="username"/>
+              className="text-input"
+              name="username" 
+              id="text-input" 
+              placeholder="username"
+
+              onChange = {(...a) => this.handleChange(...a)}/>
             </div>
 
             <label htmlFor="pword">
               <b>Password</b>
             </label>
             <input 
-            className="text-input"  
+            className="text-input" 
+            name="password" 
             placeholder="password" 
-            type = "password"/>
+            type = "password"
+            
+            onChange={(...a)=> this.handleChange(...a)}/>
 
             <label htmlFor="rpword"><b>Repeat password</b></label>
             <input 
             className="text-input"  
-            placeholder="repeat password" 
-            type = "rpassword"/>
+            placeholder="repeat password"
+            type = "password"/>
             
             <div className="button">
             <Link to={'/login'} onClick={()=> this.Login}>    
@@ -52,7 +74,8 @@ class Signup extends Component{
               </button>
             </Link>
               <button 
-              className="signupbtn"> 
+              className="signupbtn"
+              onClick={()=> this.handleSubmit()}> 
                   Signup
               </button>
             </div>   

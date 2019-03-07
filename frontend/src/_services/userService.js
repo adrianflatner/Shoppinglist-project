@@ -23,6 +23,19 @@ export default class userService{
         })
     }
 
+    register(username, password){
+        return this.fetch(`http://127.0.0.1:8000/api/register`,{
+            method: 'POST',
+            headers: {
+                'Content-Type':'application/json'
+        },
+            body: JSON.stringify({
+                username,
+                password
+            })
+        })
+    }
+
     loggedIn(){
         const token = this.getToken()
         return !!token
