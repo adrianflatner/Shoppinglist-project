@@ -20,7 +20,7 @@
   }
 
 .xBtn{
-    background: #ff0000;
+    background: #ff4040;
     color: #fff;
     border: none;
     padding: 1px 10px;
@@ -29,9 +29,13 @@
     float: right;
 }
 
+
+
 #members{
   float: right;
-
+  background-color:  	#f8f8f8;
+  min-width: 15vh;
+  text-align: center;
 }
 
 #myInput {

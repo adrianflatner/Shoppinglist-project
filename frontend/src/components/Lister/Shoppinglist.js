@@ -255,6 +255,21 @@ class Shoppinglist extends Component{
     
     }
 
+    async deleteUser(userId){
+      console.log(userId)
+      /*this.setState({ users: [...this.state.listView.users.filter(users => users.user.id !== userId)]});
+      try{
+        const res = await fetch(`http://127.0.0.1:8000/api/user/${userId}/`, {
+          method: 'DELETE',
+          headers: {'Authorization': "Token " + localStorage.getItem('id_token'), 'Content-Type':'application/json'},
+        });
+       
+      } catch (e) {
+        console.log(e);
+      }*/
+      
+    }
+
     async handleMarkings(grocery, id){
       try{
         const res = await fetch(`http://127.0.0.1:8000/api/groceries/${id}/`, {
@@ -334,8 +349,10 @@ class Shoppinglist extends Component{
             <div id="members">
                   <h5>Members:</h5><br/>
                   {this.users(this.state.listView.users).map(user => (
-                  <p>{user}</p>
+                  <p>{user}
+                  <button className="xBtn" on Click={this.deleteUser.bind(user,user.id)}>x</button></p>
                   ))}
+                  
             </div>
         </div>
             
