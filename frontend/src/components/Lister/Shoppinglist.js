@@ -60,9 +60,11 @@ class Shoppinglist extends Component{
       await this._fetchList2(window.location.pathname.match(/\d+/)[0]);
       await this._fetchUsers(window.location.pathname.match(/\d+/)[0]);
       this.groceryID();
+      console.log(this.userNameFromId(this.state.listView.author))
       if(this.userNameFromId(this.state.listView.author) === "adrian"){
-        this.state.isUserAuth = true;
-        this.datalistfunction();
+        this.setState({
+          isUserAuth: true});
+          this.datalistfunction();  
       }      
     }
 
@@ -320,24 +322,22 @@ class Shoppinglist extends Component{
 
           ))}
            <br/>
-          {this.state.isUserAuth ? "" : (
+           {console.log(this.state.isUserAuth)}
+          {!(this.state.isUserAuth) ? "" : (
             <div>
               <p>
                 <input type="text" id="myInput" list="names" onChange={(v) => this.userChange(v.target.value)} placeholder="Search for users.."/>
                 <datalist id="names"></datalist>
                 <button className="submit" onClick={() => this.addUser()}>Add User</button>
                 </p>
-                <div id="members">
+            </div>
+            )}
+            <div id="members">
                   <h5>Members:</h5><br/>
                   {this.users(this.state.listView.users).map(user => (
                   <p>{user}</p>
                   ))}
-                </div>
             </div>
-            )}
-            <br/>
-            
-          
         </div>
             
       )
