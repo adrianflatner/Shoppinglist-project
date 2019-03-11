@@ -11,6 +11,8 @@ class ListSerializer(serializers.ModelSerializer):
             'title',
             'description',
             'groceries',
+            'users',
+            'author',
         )
         model = List
 
@@ -25,5 +27,5 @@ class UserSerializer(serializers.ModelSerializer):
         return user
     class Meta:
         model = User
-        fields = ("id", "username", "password",)
+        fields = ("id", "username", "password", "is_staff")
         

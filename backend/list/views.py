@@ -52,14 +52,26 @@ def create_auth(request):
         return Response(serialized.data, status = status.HTTP_201_CREATED)
 
 
+@permission_classes((AllowAny,))
+class users(generics.ListCreateAPIView):
+    serializer_class = UserSerializer
+    queryset = User.objects.all()
+    permission_classes = (AllowAny,)
+
+@permission_classes((AllowAny,))
+class userDetailView(generics.RetrieveUpdateDestroyAPIView):
+    serializer_class = UserSerializer
+    queryset = User.objects.all()
+    permission_classes = (AllowAny,)
+
 #generating  lists of listobjects
-@permission_classes((IsAuthenticated,))
+@permission_classes((AllowAny,))
 class ShoppingList(generics.ListCreateAPIView):
     serializer_class = ListSerializer
     queryset = List.objects.all()
     permission_classes = (AllowAny,)
 
-@permission_classes((IsAuthenticated,))
+@permission_classes((AllowAny,))
 class DetailList(generics.RetrieveUpdateDestroyAPIView):
     serializer_class = ListSerializer
     queryset = List.objects.all()
