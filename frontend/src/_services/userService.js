@@ -18,6 +18,7 @@ export default class userService{
                 password
             })
         }).then(res => {
+            this.setUsername(res.user)
             this.setToken(res.token)
             return Promise.resolve(res)
         })
@@ -40,7 +41,15 @@ export default class userService{
         const token = this.getToken()
         return !!token
     }
-  
+    
+    setUsername(username){
+        localStorage.setItem('username', username)
+    }
+
+    getUsername(){
+        return localStorage.getItem('username')
+    }
+
     setToken(idToken){
         localStorage.setItem('id_token', idToken)
     }
@@ -50,7 +59,8 @@ export default class userService{
     }
 
     logout(){
-        localStorage.removeItem('id_token');
+        
+        localStorage.clear();
     }
 
     fetch (url, options){

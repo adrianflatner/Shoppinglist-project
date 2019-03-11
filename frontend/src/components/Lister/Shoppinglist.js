@@ -95,7 +95,6 @@ class Shoppinglist extends Component{
       });
   }
 
-
     userChange(user){
       var result;
       this.state.users.forEach(selectUser => {
@@ -103,7 +102,7 @@ class Shoppinglist extends Component{
           result = selectUser.id;
         }
       })
-      this.state.user = result;
+      this.user.setState(result);
     }
 
     userNameFromId(user){
