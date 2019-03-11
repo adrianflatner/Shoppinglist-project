@@ -1,9 +1,11 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
 import Login from './LoginPage/Login.js';
+import userService from '../_services/userService.js';
+import './NavBar.css';
 
 
-
+const auth = new userService()
 
 function NavBar() {
     return (
@@ -11,7 +13,7 @@ function NavBar() {
         <Link className="navbar-brand" to="/">
         Shopping List</Link>
        
-        {console.log(Login.stateListener)}
+        <div className="profileName">{auth.getUsername()}</div>
 
         </nav>
     );
