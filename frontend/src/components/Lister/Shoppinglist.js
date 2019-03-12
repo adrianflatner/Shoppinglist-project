@@ -78,6 +78,12 @@ class Shoppinglist extends Component {
     }
   }
 
+  authenticateUserGrocery(grocery){
+    if (this.userNameFromId(grocery.author) === this.auth.getUsername()) {
+      return true;
+    }
+  }
+
   datalistfunction() {
     var ServerResponse = [];
     this.state.users.forEach(selectUser => {
@@ -346,7 +352,9 @@ class Shoppinglist extends Component {
             <p style={{ textDecoration: items.completed ? 'line-through' : 'none' }} className="cardtitle">
               <input name="checkbox" type="checkbox" onChange={this.markComplete.bind(items, items.id)} />{' '}
               {items.title}
-              <button className="xBtn" onClick={this.delGrocery.bind(items, items.id)}>x</button>
+              {!(this.state.isUserAuth || this.authenticateUserGrocery(items)) ? "" : (
+                <button className="xBtn" onClick={this.delGrocery.bind(items, items.id)}>x</button>
+              )}
             </p>
             <p className="card-text">{items.description}</p>
 
@@ -367,7 +375,7 @@ class Shoppinglist extends Component {
           <h5>Members:</h5><br />
           {this.users(this.state.listView.users).map(user => (
             <p>{user}
-              <button className="xBtn" on Click={this.deleteUser.bind(user, user.id)}>x</button></p>
+              <button className="xBtn" onClick={this.deleteUser.bind(user, user.id)}>x</button></p>
           ))}
 
         </div>
