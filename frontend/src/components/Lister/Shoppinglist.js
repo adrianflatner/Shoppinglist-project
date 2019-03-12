@@ -370,14 +370,14 @@ class Shoppinglist extends Component {
         <br />
         {this.state.groceries.map(items => (
           <div className="listetittel">
-            <p style={{ textDecoration: items.completed ? 'line-through' : 'none' }} className="cardtitle">
+            <h5 style={{ textDecoration: items.completed ? 'line-through' : 'none' }} className="listetittel">
               <input name="checkbox" type="checkbox" onChange={this.markComplete.bind(items, items.id)} />{' '}
               {items.title}
               {!(this.state.isUserAuth || this.authenticateUserGrocery(items)) ? "" : (
                 <button className="xBtn" onClick={this.delGrocery.bind(items, items.id)}>x</button>
               )}
-            </p>
-            <p className="card-text">{items.description}</p>
+            </h5>
+            <p className="comment">{items.description}</p>
 
           </div>
 

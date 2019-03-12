@@ -138,10 +138,10 @@ class Shoppinglists extends Component {
 
           <div key={items.id} className="listetittel">
             <Link key={items.id} to={`/items/${items.id}`}>
-              <h3 className="card-title">{items.title}</h3>
+              <h3 className="listetittel">{items.title}</h3>
             </Link>
             <button className="xBtn" onClick={this.delList.bind(items, items.id)}>x</button>
-            <p className="card-text">{items.description}</p>
+            <p className="comment">{items.description}</p>
           </div>
 
 
