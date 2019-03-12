@@ -1,6 +1,11 @@
+.container{
+  display: grid;
+  margin-top: 100px;
+}
+
 .listetittel {
     margin-bottom: 20px;
-    display: block;
+    display: grid;
     border-bottom: 1px solid #ccc;
     padding: 0;
 }
@@ -26,7 +31,6 @@
     padding: 1px 10px;
     border-radius: 50%;
     cursor: pointer;
-    float: right;
 }
 
 #members{

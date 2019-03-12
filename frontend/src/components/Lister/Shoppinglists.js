@@ -85,7 +85,8 @@ class Shoppinglists extends Component{
     render(){
       return(
         <div className="container">
-          Welcome, {this.auth.getUsername()}
+         <h3>Welcome, {this.auth.getUsername()}</h3>
+         
         {this.state.lists.map(items => (
 
           <div key={items.id} className="listetittel">
