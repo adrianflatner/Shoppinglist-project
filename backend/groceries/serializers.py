@@ -10,6 +10,7 @@ class GrocerySerializer(serializers.ModelSerializer):
             'title',
             'description',
             'completed',
+            'author',
         )
         model = Grocery
 
