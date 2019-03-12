@@ -9,7 +9,7 @@ import * as serviceWorker from './serviceWorker';
 const Root = withRouter(App)
 
 ReactDOM.render(
-    <div>
+    <div className="main-container">
         <Router>
             <App />
         </Router>

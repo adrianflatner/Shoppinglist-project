@@ -1,0 +1,19 @@
+.navbar-container{
+    display: grid;
+    background-color: #4CAF50;
+    height: 80px;
+    width: 100%;
+    position: fixed;
+    top: 0;
+}
+.nav {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    justify-items: center;
+    align-items: center;
+}
+.navbar-brand{
+    text-decoration: none;
+    color: white;
+    cursor: default;
+}
