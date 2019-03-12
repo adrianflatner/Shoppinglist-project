@@ -1,17 +1,22 @@
 import React, { Component } from 'react';
 import './Shoppinglists.css';
+import userService from '../../_services/userService';
 
 class Shoppinglist extends Component{
-    state = {
-      lists: [],
-      listView: [],
-      groceries: [],
-      users: [],
-      user: [],
-      isUserAuth: false,
-      newItem: {title: "", description: "", completed: false}
-    };
     
+    constructor(props){
+      super(props);
+        this.state = {
+          lists: [],
+          listView: [],
+          groceries: [],
+          users: [],
+          user: [],
+          isUserAuth: false,
+          newItem: {title: "", description: "", completed: false}
+        };
+        this.auth = new userService();
+    }
     
     async _fetchList() {
       try{
@@ -60,8 +65,7 @@ class Shoppinglist extends Component{
       await this._fetchList2(window.location.pathname.match(/\d+/)[0]);
       await this._fetchUsers(window.location.pathname.match(/\d+/)[0]);
       this.groceryID();
-      console.log(this.userNameFromId(this.state.listView.author))
-      if(this.userNameFromId(this.state.listView.author) === "adrian"){
+      if(this.userNameFromId(this.state.listView.author) === this.auth.getUsername()){
         this.setState({
           isUserAuth: true});
           this.datalistfunction();  
@@ -95,14 +99,20 @@ class Shoppinglist extends Component{
       });
   }
 
-    userChange(user){
+    setUser(user){
+      this.setState({
+        user: this.idFromUsername(user)
+      })
+    }
+
+    idFromUsername(user){
       var result;
       this.state.users.forEach(selectUser => {
         if(selectUser.username === user){
           result = selectUser.id;
         }
       })
-      this.user.setState(result);
+      return result;
     }
 
     userNameFromId(user){
@@ -340,7 +350,7 @@ class Shoppinglist extends Component{
           {!(this.state.isUserAuth) ? "" : (
             <div>
               <p>
-                <input type="text" id="myInput" list="names" onChange={(v) => this.userChange(v.target.value)} placeholder="Search for users.."/>
+                <input type="text" id="myInput" list="names" onChange={(v) => this.setUser(v.target.value)} placeholder="Search for users.."/>
                 <datalist id="names"></datalist>
                 <button className="submit" onClick={() => this.addUser()}>Add User</button>
                 </p>

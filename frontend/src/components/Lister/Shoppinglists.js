@@ -9,16 +9,16 @@ class Shoppinglists extends Component{
       super(props);
       this.state = {
         lists: [],
+        userLists: [],
+        users: [],
         newItem: {title: "", description: ""}
       };
       this.auth = new userService();
-    
     }
     
     async _fetchList() {
       try{
         const lists = await this.auth.fetch('http://127.0.0.1:8000/api/');
-        console.log(lists)
         this.setState({
           lists
         });
@@ -27,8 +27,46 @@ class Shoppinglists extends Component{
       }
     }
 
+    async _fetchUsers() {
+      try{
+        const res = await fetch('http://127.0.0.1:8000/api/users', {
+          headers: {'Authorization': "Token " + localStorage.getItem('id_token'), 'Content-Type':'application/json'},
+        });
+        const users = await res.json();
+        this.setState({
+          users: users
+        });
+      } catch (e) {
+        console.log(e);
+      }
+    }
+
     async componentDidMount(){
       await this._fetchList();
+      await this._fetchUsers();
+      this.setUserLists();
+    }
+
+    idFromUsername(user){
+      var result;
+      this.state.users.forEach(selectUser => {
+        if(selectUser.username === user){
+          result = selectUser.id;
+        }
+      })
+      return result;
+    }
+
+    setUserLists(){
+      var userList = [];
+      this.state.lists.forEach(list => {
+        if(list.users.includes(this.idFromUsername(this.auth.getUsername()))){
+          userList.push(list);
+        }
+      })
+      this.setState({
+        userLists: userList
+      })
     }
 
     updateTitle(title){
@@ -86,7 +124,7 @@ class Shoppinglists extends Component{
       return(
         <div className="container">
           Welcome, {this.auth.getUsername()}
-        {this.state.lists.map(items => (
+        {this.state.userLists.map(items => (
 
           <div key={items.id} className="listetittel">
           <Link key={items.id} to={`/items/${items.id}`}>
