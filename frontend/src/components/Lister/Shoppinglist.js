@@ -4,6 +4,7 @@ import userService from '../../_services/userService';
 
 class Shoppinglist extends Component {
 
+  // First thing that happens when "this" is defined. State keeps info for the object.
   constructor(props) {
     super(props);
     this.state = {
@@ -18,6 +19,7 @@ class Shoppinglist extends Component {
     this.auth = new userService();
   }
 
+  // Fetches groceries and adds them to state 
   async _fetchGroceries() {
     try {
       const res = await fetch('http://127.0.0.1:8000/api/groceries', {
@@ -32,6 +34,7 @@ class Shoppinglist extends Component {
     }
   }
 
+  // Fetches lists and adds them to state
   async _fetchList(id) {
     try {
       const res = await fetch(`http://127.0.0.1:8000/api/${id}/`, {
@@ -46,6 +49,7 @@ class Shoppinglist extends Component {
     }
   }
 
+  // Fetches users and adds them to state
   async _fetchUsers() {
     try {
       const res = await fetch('http://127.0.0.1:8000/api/users', {
@@ -60,6 +64,7 @@ class Shoppinglist extends Component {
     }
   }
 
+  // Functions that executes when page is rendered
   async componentDidMount() {
     await this._fetchGroceries();
     await this._fetchList(window.location.pathname.match(/\d+/)[0]);
@@ -68,7 +73,7 @@ class Shoppinglist extends Component {
     this.authenticateUser();
   }
 
-
+  // Checks if user is author of list
   authenticateUser(){
     if (this.userNameFromId(this.state.listView.author) === this.auth.getUsername()) {
       this.setState({
@@ -78,12 +83,14 @@ class Shoppinglist extends Component {
     }
   }
 
+  // Checks if user is author of grocery
   authenticateUserGrocery(grocery){
     if (this.userNameFromId(grocery.author) === this.auth.getUsername()) {
       return true;
     }
   }
 
+  // Makes the search field show the users that exist when a user start writing
   datalistfunction() {
     var ServerResponse = [];
     this.state.users.forEach(selectUser => {
@@ -110,12 +117,14 @@ class Shoppinglist extends Component {
     });
   }
 
+  // Sets user to add to list
   setUser(user) {
     this.setState({
       user: this.idFromUsername(user)
     })
   }
 
+  // Takes in user and gives the users id
   idFromUsername(user) {
     var result;
     this.state.users.forEach(selectUser => {
@@ -126,6 +135,7 @@ class Shoppinglist extends Component {
     return result;
   }
 
+  // Takes in id and gives the users username
   userNameFromId(user) {
     var result;
     this.state.users.forEach(selectUser => {
@@ -136,6 +146,7 @@ class Shoppinglist extends Component {
     return result;
   }
 
+  // Gives users apart of this list
   users(userlist) {
     var result = [];
     this.state.users.forEach(selectUser => {
@@ -148,12 +159,14 @@ class Shoppinglist extends Component {
     return result;
   }
 
+  // Updates the state when something is written in input field
   updateTitle(title) {
     this.setState({
       newItem: { title, description: this.state.newItem.description }
     });
   }
 
+  // Same as over
   updateDescription(description) {
     this.setState({
       newItem: { description, title: this.state.newItem.title }
@@ -161,11 +174,13 @@ class Shoppinglist extends Component {
 
   }
 
+  // Updates the state of which groceries exist in the list
   foreignKey(id) {
     this.state.listView.groceries.push(id);
     this.handleForeignKey();
   }
 
+  // Updates state of completed groceries and executes handlemarkings 
   markComplete = (id) => {
     this.setState({
       lists: this.state.lists.map(grocery => {
@@ -178,13 +193,14 @@ class Shoppinglist extends Component {
     })
   }
 
+  // Deletes groceries and executes handleDelete
   delGrocery = (id) => {
     this.setState({ lists: [...this.state.lists.filter(grocery => grocery.id !== id)] });
     this.handleDelete(id);
 
   }
 
-
+  // Function to get the correct Ids to the list
   groceryID() {
     var result = [];
     this.state.lists.forEach(grocery => {
@@ -200,6 +216,7 @@ class Shoppinglist extends Component {
     });
   }
 
+  // Calls api and deletes grocery in backend
   async handleDelete(id) {
     try {
       const res = await fetch(`http://127.0.0.1:8000/api/groceries/${id}/`, {
@@ -217,6 +234,7 @@ class Shoppinglist extends Component {
     }
   }
 
+  // Calls api and adds grocery to backend
   async handleSubmit() {
     try {
       const res = await fetch('http://127.0.0.1:8000/api/groceries', {
@@ -239,6 +257,7 @@ class Shoppinglist extends Component {
 
   }
 
+  // Makes sure the correct groceries get handled
   async handleForeignKey() {
     try {
       var id = window.location.pathname.match(/\d+/)[0];
@@ -259,6 +278,7 @@ class Shoppinglist extends Component {
 
   }
 
+  // Calls api and adds user to list
   async addUser() {
     this.state.listView.users.push(this.state.user);
     try {
@@ -294,6 +314,7 @@ class Shoppinglist extends Component {
 
   }
 
+  // Calls api and marks a grocery
   async handleMarkings(grocery, id) {
     try {
       const res = await fetch(`http://127.0.0.1:8000/api/groceries/${id}/`, {
