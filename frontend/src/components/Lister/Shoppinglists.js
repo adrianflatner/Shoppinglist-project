@@ -11,7 +11,7 @@ class Shoppinglists extends Component {
       lists: [],
       userLists: [],
       users: [],
-      newItem: { title: "", description: "" }
+      newItem: { title: "", description: "", users: [], author: ""}
     };
     this.auth = new userService();
   }
@@ -45,6 +45,7 @@ class Shoppinglists extends Component {
     await this._fetchList();
     await this._fetchUsers();
     this.setUserLists();
+    this.setAuthor();
   }
 
   idFromUsername(user) {
@@ -69,16 +70,19 @@ class Shoppinglists extends Component {
       userLists: userList
     })
   }
-
+  setAuthor(){
+    this.state.newItem.author = this.idFromUsername(this.auth.getUsername());
+    this.state.newItem.users.push(this.idFromUsername(this.auth.getUsername()));
+  }
   updateTitle(title) {
     this.setState({
-      newItem: { title, description: this.state.newItem.description }
+      newItem: { title, description: this.state.newItem.description, users: this.state.newItem.users, author: this.state.newItem.author}
     });
   }
 
   updateDescription(description) {
     this.setState({
-      newItem: { description, title: this.state.newItem.title }
+      newItem: { description, title: this.state.newItem.title, users: this.state.newItem.users, author: this.state.newItem.author}
     });
 
   }
@@ -97,6 +101,8 @@ class Shoppinglists extends Component {
       });
       if (res.ok) {
         await this._fetchList();
+        await this._fetchUsers();
+        this.setUserLists();
       }
     } catch (e) {
       console.log(e);
@@ -112,9 +118,12 @@ class Shoppinglists extends Component {
       });
       if (res.ok) {
         await this._fetchList();
+        await this._fetchUsers();
+        this.setUserLists();
       }
       document.getElementById("Description").value = ""
       document.getElementById("NewList").value = ""
+
     } catch (e) {
       console.log(e);
     }
