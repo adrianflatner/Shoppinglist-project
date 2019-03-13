@@ -58,6 +58,23 @@ class Shoppinglists extends Component {
     return result;
   }
 
+  authenticateUser(list){
+    if (this.userNameFromId(list.author) === this.auth.getUsername()) {
+      return true;
+    }
+  }
+
+  // Takes in id and returns the users username
+  userNameFromId(user) {
+    var result;
+    this.state.users.forEach(selectUser => {
+      if (selectUser.id === user) {
+        result = selectUser.username;
+      }
+    })
+    return result;
+  }
+
   setUserLists() {
     var userList = [];
     var user = this.idFromUsername(this.auth.getUsername());
@@ -75,7 +92,7 @@ class Shoppinglists extends Component {
     this.state.newItem.author = this.idFromUsername(this.auth.getUsername());
     this.state.newItem.users.push(this.idFromUsername(this.auth.getUsername()));
   }
-  
+
   updateTitle(title) {
     this.setState({
       newItem: { title, description: this.state.newItem.description, users: this.state.newItem.users, author: this.state.newItem.author}
@@ -142,7 +159,9 @@ class Shoppinglists extends Component {
             <Link key={items.id} to={`/items/${items.id}`}>
               <h3 className="listetittel">{items.title}</h3>
             </Link>
+            {!(this.authenticateUser(items)) ? "" : (
             <button className="xBtn" onClick={this.delList.bind(items, items.id)}>x</button>
+            )}
             <p className="comment">{items.description}</p>
           </div>
 
