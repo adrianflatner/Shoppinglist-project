@@ -14,7 +14,7 @@ class Shoppinglist extends Component {
       users: [],
       user: [],
       isUserAuth: false,
-      newItem: { title: "", description: "", completed: false }
+      newItem: { title: "", description: "", completed: false, author: "" }
     };
     this.auth = new userService();
   }
@@ -71,6 +71,12 @@ class Shoppinglist extends Component {
     await this._fetchUsers(window.location.pathname.match(/\d+/)[0]);
     this.groceryID();
     this.authenticateUser();
+    this.setAuthor();
+  }
+
+  //Sets author to grocery when new grocery is made
+  setAuthor(){
+    this.state.newItem.author = this.idFromUsername(this.auth.getUsername());
   }
 
   // Checks if user is author of list
@@ -124,7 +130,7 @@ class Shoppinglist extends Component {
     })
   }
 
-  // Takes in user and gives the users id
+  // Takes in user and returns the users id
   idFromUsername(user) {
     var result;
     this.state.users.forEach(selectUser => {
@@ -135,7 +141,7 @@ class Shoppinglist extends Component {
     return result;
   }
 
-  // Takes in id and gives the users username
+  // Takes in id and returns the users username
   userNameFromId(user) {
     var result;
     this.state.users.forEach(selectUser => {
@@ -162,14 +168,14 @@ class Shoppinglist extends Component {
   // Updates the state when something is written in input field
   updateTitle(title) {
     this.setState({
-      newItem: { title, description: this.state.newItem.description }
+      newItem: { title, description: this.state.newItem.description, author: this.state.newItem.author }
     });
   }
 
   // Same as over
   updateDescription(description) {
     this.setState({
-      newItem: { description, title: this.state.newItem.title }
+      newItem: { description, title: this.state.newItem.title, author: this.state.newItem.author }
     });
 
   }

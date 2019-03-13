@@ -70,10 +70,12 @@ class Shoppinglists extends Component {
       userLists: userList
     })
   }
+
   setAuthor(){
     this.state.newItem.author = this.idFromUsername(this.auth.getUsername());
     this.state.newItem.users.push(this.idFromUsername(this.auth.getUsername()));
   }
+  
   updateTitle(title) {
     this.setState({
       newItem: { title, description: this.state.newItem.description, users: this.state.newItem.users, author: this.state.newItem.author}
