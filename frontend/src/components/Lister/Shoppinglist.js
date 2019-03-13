@@ -406,8 +406,19 @@ class Shoppinglist extends Component {
             <p>{user}
               <button className="xBtn" onClick={this.deleteUser.bind(user, user.id)}>x</button></p>
           ))}
-
         </div>
+        <h4>Comments</h4>
+        <div class="commentbox">
+          <div class="comment-username">
+            <h6>{this.auth.getUsername()}</h6><br />
+          </div>
+          <br />
+          <div>
+            <input type="text" placeholder="Write a comment" id="NewComment"/>
+          </div> 
+        </div>
+        <button className="submit" onClick={() => this.handleSubmit()}>Comment</button>
+
       </div>
 
     )
