@@ -13,6 +13,7 @@ class ListSerializer(serializers.ModelSerializer):
             'groceries',
             'users',
             'author',
+            'comments',
         )
         model = List
 
