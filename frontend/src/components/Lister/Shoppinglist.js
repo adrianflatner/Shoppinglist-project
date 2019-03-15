@@ -407,6 +407,8 @@ class Shoppinglist extends Component {
           </div>
         )}
         <div id="members">
+          <h5>Author:</h5><br />
+          <p>{this.userNameFromId(this.state.listView.author)}</p><br/>
           <h5>Members:</h5><br />
           {this.users(this.state.listView.users).map(user => (
             <p>{user}
