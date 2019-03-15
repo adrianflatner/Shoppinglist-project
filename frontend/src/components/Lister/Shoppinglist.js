@@ -305,18 +305,26 @@ class Shoppinglist extends Component {
 
   }
 
-  async deleteUser(userId) {
-    console.log(userId)
-    /*this.setState({ users: [...this.state.listView.users.filter(users => users.user.id !== userId)]});
+  async deleteUser(user) {
+    console.log(user)
+    this.setState({ users: [...this.state.listView.users.filter(users => users.user !== user)]});
+    console.log(...this.state.listView.users)
+    var id = this.idFromUsername(user)
+    
     try{
-      const res = await fetch(`http://127.0.0.1:8000/api/user/${userId}/`, {
+      const res = await fetch(`http://127.0.0.1:8000/api/user/${id}/`, {
         method: 'DELETE',
         headers: {'Authorization': "Token " + localStorage.getItem('id_token'), 'Content-Type':'application/json'},
       });
+      if (res.ok) {
+        await this._fetchGroceries();
+        await this._fetchList(window.location.pathname.match(/\d+/)[0]);
+        await this._fetchUsers(window.location.pathname.match(/\d+/)[0]);
+      }
      
     } catch (e) {
       console.log(e);
-    }*/
+    }
 
   }
 
@@ -402,7 +410,8 @@ class Shoppinglist extends Component {
           <h5>Members:</h5><br />
           {this.users(this.state.listView.users).map(user => (
             <p>{user}
-              <button className="xBtn" onClick={this.deleteUser.bind(user, user.id)}>x</button></p>
+              {!(this.state.isUserAuth) ? "" : (
+              <button className="xBtn" onClick={this.deleteUser.bind(user, user)}>x</button>)}</p>
           ))}
 
         </div>
