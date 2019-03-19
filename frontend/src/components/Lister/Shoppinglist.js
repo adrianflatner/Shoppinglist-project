@@ -79,6 +79,10 @@ class Shoppinglist extends Component {
     this.state.newItem.author = this.idFromUsername(this.auth.getUsername());
   }
 
+  getAuthor(){
+    return this.state.newItem.author
+  }
+
   // Checks if user is author of list
   authenticateUser(){
     if (this.userNameFromId(this.state.listView.author) === this.auth.getUsername()) {
@@ -307,7 +311,7 @@ class Shoppinglist extends Component {
 
     //Calls api and deletes user from list
  async deleteUser(user){
-   console.log(user)
+
    var userid=this.idFromUsername(user)
 
   for( var i = 0; i < this.state.listView.users.length; i++){ 
@@ -315,13 +319,11 @@ class Shoppinglist extends Component {
       this.state.listView.users.splice(i, 1); 
     }
   }
-   console.log(this.state.listView)
-   console.log(this.state.newItem.author)
+   
    
   
    try {
     var id = window.location.pathname.match(/\d+/)[0];
-    console.log(id)
     const res = await fetch(`http://127.0.0.1:8000/api/${id}/`, {
       body: JSON.stringify(this.state.listView),
       method: 'PUT',
@@ -380,6 +382,7 @@ class Shoppinglist extends Component {
   }*/
 
   render() {
+
     return (
       <div className="container">
         <div>
@@ -424,7 +427,7 @@ class Shoppinglist extends Component {
           <h5>Members:</h5><br />
           {this.users(this.state.listView.users).map(user => (
             <p>{user}
-              {!((this.state.isUserAuth || this.auth.getUsername()===user) && this.idFromUsername(user)!==this.state.newItem.author ) ? "" : (
+              {!((this.state.isUserAuth || this.auth.getUsername()===user) && this.idFromUsername(user)!==this.getAuthor() ) ? "" : (
               <button className="xBtn" onClick={()=>this.deleteUser(user)}>x</button>)}</p>
           ))}
 
