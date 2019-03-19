@@ -3,6 +3,9 @@
     grid-row-gap: 10px;
     margin-left: 33%; 
     margin-right: 33%;
+    box-shadow: 0 1px 4px rgba(0,0,0,.03);
+    border: 1.2px solid rgba(0,0,0,.04);
+    padding: 20px;
 }
 
 #login {
@@ -46,4 +49,18 @@
   
   .submit-button:hover {
     opacity: 0.8;
+  }
+
+  .password-box {
+    margin-top: 20px;
+    margin-bottom: 15px
+  }
+
+  .login-text{
+    border-bottom: 1.2px solid #ccc;
+    margin-bottom: 17px;
+  }
+
+  .signup-link{
+    margin-top: 0px;
   }

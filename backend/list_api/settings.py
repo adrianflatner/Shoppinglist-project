@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'list_api',
     'list',
     'groceries',
+    'comments',
 ]
 
 REST_FRAMEWORK = {

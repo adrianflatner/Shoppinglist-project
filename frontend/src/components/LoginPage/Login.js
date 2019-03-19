@@ -45,8 +45,9 @@ class Login extends Component{
     render(){
         return (
             <div className="grid">
-                <h1>Login</h1>
+                <h1 className="login-text">Login</h1>
                 <div>
+                    <div>
                     <b>Username</b>
                     <input 
                     className="grid-input" 
@@ -54,23 +55,30 @@ class Login extends Component{
                     type="text"
                     placeholder="username"
                     onChange={(...a) => this.handleChange(...a)}/>
-                    
-                    <b>Password</b>
-                    <input
-                    className="grid-input" 
-                    name="password" 
-                    type = "password"
-                    placeholder="password"
-                    onChange={(...a) => this.handleChange(...a)}/>
-                    
+                    </div>
+
+                    <div className="password-box">
+                        <b>Password</b>
+                        <input
+                        className="grid-input" 
+                        name="password" 
+                        type = "password"
+                        placeholder="password"
+                        onChange={(...a) => this.handleChange(...a)}/>
+                    </div>
+                    <br />
+                    <div>
                     <button
-                    className="submit-button"
-                    onClick={() => this.handleFormSubmit()}
-                    >
-                        Login
-                    </button>
+                        className="submit-button"
+                        onClick={() => this.handleFormSubmit()}
+                        >
+                            Login
+                        </button>
+                    </div>
                 </div>
+                <div className="signup-link">
                 <Link to={'/signup'} onClick={()=> this.Signup}>Signup here</Link>
+                </div>
             </div>
             
 

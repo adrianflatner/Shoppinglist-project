@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import './Shoppinglists.css';
 import userService from '../../_services/userService';
 
+
 class Shoppinglist extends Component {
 
   // First thing that happens when "this" is defined. State keeps info for the object.
@@ -13,8 +14,11 @@ class Shoppinglist extends Component {
       groceries: [],
       users: [],
       user: [],
+      comments: [],
+      relatedComments: [],
       isUserAuth: false,
-      newItem: { title: "", description: "", completed: false, author: "" }
+      newItem: { title: "", description: "", completed: false, author: "" },
+      commentItem: { comment: "", author: "" },
     };
     this.auth = new userService();
   }
@@ -64,12 +68,29 @@ class Shoppinglist extends Component {
     }
   }
 
+  // Fetches comments and adds them to state 
+  async _fetchComments() {
+    try {
+      const res = await fetch('http://127.0.0.1:8000/api/comments', {
+        headers: { 'Authorization': "Token " + localStorage.getItem('id_token'), 'Content-Type': 'application/json' },
+      });
+      const comments = await res.json();
+      this.setState({
+        comments: comments
+      });
+    } catch (e) {
+      console.log(e);
+    }
+  }
+
   // Functions that executes when page is rendered
   async componentDidMount() {
     await this._fetchGroceries();
     await this._fetchList(window.location.pathname.match(/\d+/)[0]);
     await this._fetchUsers(window.location.pathname.match(/\d+/)[0]);
+    await this._fetchComments();
     this.groceryID();
+    this.commentID();
     this.authenticateUser();
     this.setAuthor();
   }
@@ -77,6 +98,9 @@ class Shoppinglist extends Component {
   //Sets author to grocery when new grocery is made
   setAuthor(){
     this.state.newItem.author = this.idFromUsername(this.auth.getUsername());
+    this.state.commentItem.author = this.idFromUsername(this.auth.getUsername());
+    
+
   }
 
   // Checks if user is author of list
@@ -177,12 +201,24 @@ class Shoppinglist extends Component {
     this.setState({
       newItem: { description, title: this.state.newItem.title, author: this.state.newItem.author }
     });
-
   }
+
+  // Updates the comment when something is written in input field
+  updateComment(comment) {
+    this.setState({
+      commentItem: { comment, author: this.state.commentItem.author }
+    });
+  }
+
 
   // Updates the state of which groceries exist in the list
   foreignKey(id) {
     this.state.listView.groceries.push(id);
+    this.handleForeignKey();
+  }
+
+  foreignKeyComment(id) {
+    this.state.listView.comments.push(id);
     this.handleForeignKey();
   }
 
@@ -221,6 +257,22 @@ class Shoppinglist extends Component {
       groceries: result
     });
   }
+
+  commentID() {
+    var result = [];
+    this.state.comments.forEach(comments => {
+      this.state.listView.comments.forEach(Id => {
+        if (comments.id === Id) {
+          result.push(comments)
+        }
+      }
+      )
+    })
+    this.setState({
+      relatedComments: result
+    });
+  }
+
 
   // Calls api and deletes grocery in backend
   async handleDelete(id) {
@@ -263,6 +315,33 @@ class Shoppinglist extends Component {
 
   }
 
+
+  // Calls api and adds comment to backend
+  async handleCommentSubmit() {
+    console.log(this.state.commentItem)
+    try {
+      const res = await fetch('http://127.0.0.1:8000/api/comments', {
+        body: JSON.stringify(this.state.commentItem),
+        method: 'POST',
+        headers: { 'Authorization': "Token " + localStorage.getItem('id_token'), 'Content-Type': 'application/json' },
+      });
+      if (res.ok) {
+        await this._fetchComments();
+        await this._fetchGroceries();
+        await this._fetchList(window.location.pathname.match(/\d+/)[0]);
+        await this._fetchUsers(window.location.pathname.match(/\d+/)[0]);
+        this.commentID();
+        this.foreignKeyComment(this.state.comments.slice(-1)[0].id)
+      }
+      document.getElementById("NewComment").value = ""
+      //document.getElementById("Description").value = ""
+    } catch (e) {
+      console.log(e);
+    }
+
+  }
+
+
   // Makes sure the correct groceries get handled
   async handleForeignKey() {
     try {
@@ -277,12 +356,15 @@ class Shoppinglist extends Component {
         await this._fetchList(window.location.pathname.match(/\d+/)[0]);
         await this._fetchUsers(window.location.pathname.match(/\d+/)[0]);
         this.groceryID();
+        this.commentID();
       }
     } catch (e) {
       console.log(e);
     }
 
   }
+
+  
 
   // Calls api and adds user to list
   async addUser() {
@@ -404,13 +486,12 @@ class Shoppinglist extends Component {
               )}
             </h5>
             <p className="comment">{items.description}</p>
-
           </div>
 
         ))}
         <br />
         {!(this.state.isUserAuth) ? "" : (
-          <div>
+          <div className="add-user">
             <p>
               <input type="text" id="myInput" list="names" onChange={(v) => this.setUser(v.target.value)} placeholder="Search for users.." />
               <datalist id="names"></datalist>
@@ -418,6 +499,8 @@ class Shoppinglist extends Component {
             </p>
           </div>
         )}
+          <br />
+          <br />
         <div id="members">
           <h5>Author:</h5><br />
           <p>{this.userNameFromId(this.state.listView.author)}</p><br/>
@@ -427,8 +510,26 @@ class Shoppinglist extends Component {
               {!((this.state.isUserAuth || this.auth.getUsername()===user) && this.idFromUsername(user)!==this.state.newItem.author ) ? "" : (
               <button className="xBtn" onClick={()=>this.deleteUser(user)}>x</button>)}</p>
           ))}
-
         </div>
+
+        {this.state.relatedComments.map(items => (
+          <div className="commentBox">
+            <p>{items.comment}</p>
+          </div>
+
+        ))}
+        <h4>Comments</h4>
+        <div class="commentbox">
+          <div class="comment-username">
+            <h6>{this.auth.getUsername()}</h6><br />
+          </div>
+          <br />
+          <div>
+            <input type="text" placeholder="Write a comment" id="NewComment" onChange={(v) => this.updateComment(v.target.value)}/>
+          </div> 
+        </div>
+        <button className="submit" onClick={() => this.handleCommentSubmit()}>Comment</button>
+
       </div>
 
     )
