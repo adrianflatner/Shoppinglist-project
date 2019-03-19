@@ -342,6 +342,34 @@ class Shoppinglist extends Component {
   }
 
 
+  async deleteComment(comment){
+    console.log(comment)
+    console.log(this.state.relatedComments)
+    console.log(this.state.relatedComments[0])
+    for( var i = 0; i < this.state.relatedComments.length; i++){ 
+      if ( this.state.relatedComments[i] === comment) {
+        this.state.relatedComments.splice(i, 1); 
+      }
+    }
+    console.log(this.state.relatedComments)
+    /*try {
+      const res = await fetch(`http://127.0.0.1:8000/api/api/comments/${commentid}/`, {
+        method: 'DELETE',
+        headers: { 'Authorization': "Token " + localStorage.getItem('id_token'), 'Content-Type': 'application/json' },
+      });
+      if (res.ok) {
+        await this._fetchGroceries();
+        await this._fetchList(window.location.pathname.match(/\d+/)[0]);
+        await this._fetchUsers(window.location.pathname.match(/\d+/)[0]);
+      }
+    } catch (e) {
+      console.log(e);
+    }*/
+
+
+  }
+
+
   // Makes sure the correct groceries get handled
   async handleForeignKey() {
     try {
@@ -515,6 +543,9 @@ class Shoppinglist extends Component {
         <h4>Comments</h4>
         {this.state.relatedComments.map(items => (
           <div className="boxNewComment">
+           {!(this.state.isUserAuth || this.auth.getUsername()===this.userNameFromId(items.author)) ? "" : (
+                <button className="xBtn" onClick={()=>this.deleteComment(items)} >x</button>
+              )}
            <div>  
             <h6 className="comment-username">{this.userNameFromId(items.author)}</h6> <br />
            </div>
