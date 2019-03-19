@@ -305,29 +305,41 @@ class Shoppinglist extends Component {
 
   }
 
-  async deleteUser(user) {
-    console.log(user)
-    this.setState({ users: [...this.state.listView.users.filter(users => users.user !== user)]});
-    console.log(...this.state.listView.users)
-    var id = this.idFromUsername(user)
-    
-    try{
-      const res = await fetch(`http://127.0.0.1:8000/api/user/${id}/`, {
-        method: 'DELETE',
-        headers: {'Authorization': "Token " + localStorage.getItem('id_token'), 'Content-Type':'application/json'},
-      });
-      if (res.ok) {
-        await this._fetchGroceries();
-        await this._fetchList(window.location.pathname.match(/\d+/)[0]);
-        await this._fetchUsers(window.location.pathname.match(/\d+/)[0]);
-      }
-     
-    } catch (e) {
-      console.log(e);
+    //Calls api and deletes user from list
+ async deleteUser(user){
+   console.log(user)
+   var userid=this.idFromUsername(user)
+
+  for( var i = 0; i < this.state.listView.users.length; i++){ 
+    if ( this.state.listView.users[i] === userid) {
+      this.state.listView.users.splice(i, 1); 
     }
-
   }
-
+   console.log(this.state.listView)
+   console.log(this.state.newItem.author)
+   
+  
+   try {
+    var id = window.location.pathname.match(/\d+/)[0];
+    console.log(id)
+    const res = await fetch(`http://127.0.0.1:8000/api/${id}/`, {
+      body: JSON.stringify(this.state.listView),
+      method: 'PUT',
+      headers: { 'Authorization': "Token " + localStorage.getItem('id_token'), 'Content-Type': 'application/json' },
+    });
+    if (res.ok) {
+      await this._fetchGroceries();
+      await this._fetchList(window.location.pathname.match(/\d+/)[0]);
+      await this._fetchUsers(window.location.pathname.match(/\d+/)[0]);
+    }
+  } catch (e) {
+    console.log(e);
+  }
+  if(user===this.auth.getUsername()){
+    this.props.history.replace('/');
+  }
+  
+ }
   // Calls api and marks a grocery
   async handleMarkings(grocery, id) {
     try {
@@ -412,8 +424,8 @@ class Shoppinglist extends Component {
           <h5>Members:</h5><br />
           {this.users(this.state.listView.users).map(user => (
             <p>{user}
-              {!(this.state.isUserAuth) ? "" : (
-              <button className="xBtn" onClick={this.deleteUser.bind(user, user)}>x</button>)}</p>
+              {!((this.state.isUserAuth || this.auth.getUsername()===user) && this.idFromUsername(user)!==this.state.newItem.author ) ? "" : (
+              <button className="xBtn" onClick={()=>this.deleteUser(user)}>x</button>)}</p>
           ))}
 
         </div>
