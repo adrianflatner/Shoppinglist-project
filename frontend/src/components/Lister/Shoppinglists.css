@@ -59,13 +59,29 @@
     width: 40%
 }
 
+
+.boxNewComment{
+    background-color: #fff;
+    box-shadow: 0 1px 4px rgba(0,0,0,.03);
+    border: 1px solid rgba(0,0,0,.04);
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 20px;
+    margin-bottom: 15px;
+    width: 40%
+
+}
+
 #NewComment {
     border: none;
+    outline: none;
+    
 
 }
     
 .comment-username {
     color: #2C3E50; 
 }
-    
+
 

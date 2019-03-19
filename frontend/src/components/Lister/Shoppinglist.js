@@ -512,20 +512,27 @@ class Shoppinglist extends Component {
           ))}
         </div>
 
+        <h4>Comments</h4>
         {this.state.relatedComments.map(items => (
-          <div className="commentBox">
-            <p>{items.comment}</p>
+          <div className="boxNewComment">
+           <div>  
+            <h6 className="comment-username">{this.userNameFromId(items.author)}</h6> <br />
+           </div>
+           
+           <div>< br/>
+           <p>{items.comment}</p>
+           </div>
           </div>
 
         ))}
-        <h4>Comments</h4>
-        <div class="commentbox">
-          <div class="comment-username">
+        
+        <div className="commentbox">
+          <div className="comment-username">
             <h6>{this.auth.getUsername()}</h6><br />
           </div>
           <br />
           <div>
-            <input type="text" placeholder="Write a comment" id="NewComment" onChange={(v) => this.updateComment(v.target.value)}/>
+            <input type="text" placeholder="Write a new comment" id="NewComment" onChange={(v) => this.updateComment(v.target.value)}/>
           </div> 
         </div>
         <button className="submit" onClick={() => this.handleCommentSubmit()}>Comment</button>
