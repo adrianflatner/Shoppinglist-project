@@ -346,25 +346,32 @@ class Shoppinglist extends Component {
     console.log(comment)
     console.log(this.state.relatedComments)
     console.log(this.state.relatedComments[0])
+    var id;
     for( var i = 0; i < this.state.relatedComments.length; i++){ 
       if ( this.state.relatedComments[i] === comment) {
+        id=this.state.relatedComments[i].id
         this.state.relatedComments.splice(i, 1); 
       }
     }
+    console.log(id)
     console.log(this.state.relatedComments)
-    /*try {
-      const res = await fetch(`http://127.0.0.1:8000/api/api/comments/${commentid}/`, {
+    console.log(localStorage.getItem('id_token'))
+    try {
+      const res = await fetch(`http://127.0.0.1:8000/api/comments/${id}/`, {
         method: 'DELETE',
         headers: { 'Authorization': "Token " + localStorage.getItem('id_token'), 'Content-Type': 'application/json' },
       });
       if (res.ok) {
+        await this._fetchComments();
         await this._fetchGroceries();
         await this._fetchList(window.location.pathname.match(/\d+/)[0]);
         await this._fetchUsers(window.location.pathname.match(/\d+/)[0]);
+        this.commentID();
+        this.foreignKeyComment(this.state.comments.slice(-1)[0].id)
       }
     } catch (e) {
       console.log(e);
-    }*/
+    }
 
 
   }
@@ -543,16 +550,19 @@ class Shoppinglist extends Component {
         <h4>Comments</h4>
         {this.state.relatedComments.map(items => (
           <div className="boxNewComment">
-           {!(this.state.isUserAuth || this.auth.getUsername()===this.userNameFromId(items.author)) ? "" : (
-                <button className="xBtn" onClick={()=>this.deleteComment(items)} >x</button>
-              )}
+           
            <div>  
             <h6 className="comment-username">{this.userNameFromId(items.author)}</h6> <br />
            </div>
            
            <div>< br/>
-           <p>{items.comment}</p>
+           <p>{items.comment} {!(this.state.isUserAuth || this.auth.getUsername()===this.userNameFromId(items.author)) ? "" : (
+                <button className="xBtn" onClick={()=>this.deleteComment(items)} >x</button>
+
+              )}</p>
+           
            </div>
+           
           </div>
 
         ))}
