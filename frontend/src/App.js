@@ -10,6 +10,7 @@ import Shoppinglist from './components/Lister/Shoppinglist';
 import Shoppinglists from './components/Lister/Shoppinglists';
 import Login from './components/LoginPage/Login'
 import Signup from './components/SignupPage/Signup';
+import Profil from './components/Profil/profil';
 
 const Auth = new userServices();
 class App extends Component{
@@ -28,6 +29,7 @@ class App extends Component{
         <Route exact path="/login" component={Login}/>
         <Route exact path='/signup' component={Signup}/>
         <Route exact path='/items/:id' component={Shoppinglist}/>
+        <Route exact path='/profil' component={Profil}/>
       </div>
     );
   }
