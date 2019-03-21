@@ -228,12 +228,21 @@ class Shoppinglist extends Component {
       lists: this.state.lists.map(grocery => {
         if (grocery.id === id) {
           grocery.completed = !grocery.completed;
+          if (grocery.completed === true){
+            grocery.completedBy = this.idFromUsername(this.auth.getUsername());
+          } else {
+            grocery.completedBy = "";
+          }
+
           this.handleMarkings(grocery, id);
+     
         }
         return grocery;
       })
     })
   }
+
+
 
   // Deletes groceries and executes handleDelete
   delGrocery = (id) => {
@@ -497,6 +506,8 @@ class Shoppinglist extends Component {
   }*/
 
   render() {
+    console.log(this.state.listView.author)
+    console.log("f")
     return (
       <div className="container">
         <div>
@@ -520,8 +531,9 @@ class Shoppinglist extends Component {
                 <button className="xBtn" onClick={this.delGrocery.bind(items, items.id)}>x</button>
               )}
             </h5>
-            <p className="comment">{items.description}</p>
-          </div>
+            <p> {items.description}</p>
+            <p className="comment">{items.completed ? "Kjøpt av "+ this.userNameFromId(items.completedBy): ""}</p>
+             </div>
 
         ))}
         <br />
@@ -542,7 +554,7 @@ class Shoppinglist extends Component {
           <h5>Members:</h5><br />
           {this.users(this.state.listView.users).map(user => (
             <p>{user}
-              {!((this.state.isUserAuth || this.auth.getUsername()===user) && this.idFromUsername(user)!==this.state.newItem.author ) ? "" : (
+              {!((this.state.isUserAuth || this.auth.getUsername()===user) && this.idFromUsername(user)!==this.state.listView.author ) ? "" : (
               <button className="xBtn" onClick={()=>this.deleteUser(user)}>x</button>)}</p>
           ))}
         </div>
@@ -556,12 +568,13 @@ class Shoppinglist extends Component {
            </div>
            
            <div>< br/>
-           <p>{items.comment} {!(this.state.isUserAuth || this.auth.getUsername()===this.userNameFromId(items.author)) ? "" : (
-                <button className="xBtn" onClick={()=>this.deleteComment(items)} >x</button>
+           <p>{items.comment}
 
-              )}</p>
+              </p>
            
            </div>
+           {!(this.state.isUserAuth || this.auth.getUsername()===this.userNameFromId(items.author)) ? "" : (
+                <button className="xBtn" onClick={()=>this.deleteComment(items)} >x</button>)}
            
           </div>
 
