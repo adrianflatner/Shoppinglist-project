@@ -367,7 +367,6 @@ class Shoppinglist extends Component {
         await this._fetchList(window.location.pathname.match(/\d+/)[0]);
         await this._fetchUsers(window.location.pathname.match(/\d+/)[0]);
         this.commentID();
-        this.foreignKeyComment(this.state.comments.slice(-1)[0].id)
       }
     } catch (e) {
       console.log(e);
