@@ -18,16 +18,15 @@ class NavBar extends Component{
             <div className="navbar-container">
         {(Auth.loggedIn()) ? 
             <nav className="nav">
-                <Link className="navbar-brand" to="">
+                <Link className="navbar-brand" to='/'>
                 Shopping List</Link>
                 <Link className="navbar-brand" to='/profil'>Profil</Link>
-                <Link className="navbar-brand" to=''>Lister</Link>
-                <div onClick={this.handleLogout.bind(this)}>Logout</div>
+                <div className="navbar-brand" id="logout" onClick={this.handleLogout.bind(this)}>Logout</div>
                 
             </nav> :
                 <nav className="nav">
-                <Link className="navbar-brand" to="">
-                LoggedIn</Link>
+                <Link className="navbar-brand" to="/login">
+                ShoppingList</Link>
         
                 {console.log(Login.stateListener)}
                 

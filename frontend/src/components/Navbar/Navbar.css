@@ -15,5 +15,10 @@
 .navbar-brand{
     text-decoration: none;
     color: white;
-    cursor: default;
+    cursor: pointer;
+}
+
+#logout{
+    grid-column: 5;
+    color: white;
 }
