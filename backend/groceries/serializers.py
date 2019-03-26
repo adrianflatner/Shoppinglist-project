@@ -10,13 +10,14 @@ class GrocerySerializer(serializers.ModelSerializer):
             'title',
             'description',
             'completed',
+            'completedBy',
             'author',
         )
         model = Grocery
 
 """class UserSerializer(serializers.ModelSerializer):
     class Meta:
-        model = User 
+        model = User
         fields = ('username',)
 
 class UserSerializerWithToken(serializers.ModelSerializer):
@@ -40,5 +41,5 @@ class UserSerializerWithToken(serializers.ModelSerializer):
         instance.save()
         return instance
     class Meta:
-        model = User 
+        model = User
         fields = ('token', 'username', 'password')"""

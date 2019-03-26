@@ -228,12 +228,20 @@ class Shoppinglist extends Component {
       lists: this.state.lists.map(grocery => {
         if (grocery.id === id) {
           grocery.completed = !grocery.completed;
+          if (grocery.completed === true){
+            grocery.completedBy = this.idFromUsername(this.auth.getUsername());
+          } else {
+            grocery.completedBy = "";
+          }
+
           this.handleMarkings(grocery, id);
+     
         }
         return grocery;
       })
     })
   }
+
 
   // Deletes groceries and executes handleDelete
   delGrocery = (id) => {
@@ -519,10 +527,12 @@ class Shoppinglist extends Component {
                 <button className="xBtn" onClick={this.delGrocery.bind(items, items.id)}>x</button>
               )}
             </h5>
-            <p className="comment">{items.description}</p>
-          </div>
+            <p> {items.description}</p>
+            <p className="comment">{items.completed ? "Kjøpt av "+ this.userNameFromId(items.completedBy): ""}</p>
+             </div>
 
         ))}
+
         <br />
         {!(this.state.isUserAuth) ? "" : (
           <div className="add-user">
