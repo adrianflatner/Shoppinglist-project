@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import './Shoppinglists.css';
+import './Shoppinglist.css';
 import userService from '../../_services/userService';
 
 class Shoppinglist extends Component {
@@ -333,73 +333,51 @@ class Shoppinglist extends Component {
     }
 
   }
-  /*myFunction() {
-    // Declare variables
-    var input, filter, ul, li, a, i, txtValue;
-    input = document.getElementById('myInput');
-    filter = input.value.toUpperCase();
-    ul = document.getElementById("myUL");
-    li = ul.getElementsByTagName('li');
-  
-    // Loop through all list items, and hide those who don't match the search query
-    for (i = 0; i < li.length; i++) {
-      a = li[i].getElementsByTagName("a")[0];
-      txtValue = a.textContent || a.innerText;
-      if (txtValue.toUpperCase().indexOf(filter) > -1) {
-        li[i].style.display = "";
-      } else {
-        li[i].style.display = "none";
-      }
-    }
-  }*/
 
   render() {
     return (
-      <div className="container">
-        <div>
-          <h3>{this.state.listView.title}</h3>
+      <div className="container-list">
+        <div className="title-box">
+          <h1>{this.state.listView.title}</h1>
         </div>
-        <br />
-        <div>
-          <p>
-            <input placeholder="New grocery" id="NewGrocery" onChange={(v) => this.updateTitle(v.target.value)} />
-            <input placeholder="Description" id="Description" onChange={(v) => this.updateDescription(v.target.value)} />
-            <button className="submit" onClick={() => this.handleSubmit()}>Add Grocery</button>
-          </p>
-        </div>
-        <br />
+        
+        <div className="grocery-list"> 
         {this.state.groceries.map(items => (
-          <div className="listetittel">
+          <div key={items.id} className="listetittel">
             <p style={{ textDecoration: items.completed ? 'line-through' : 'none' }} className="cardtitle">
               <input name="checkbox" type="checkbox" onChange={this.markComplete.bind(items, items.id)} />{' '}
               {items.title}
-              {!(this.state.isUserAuth || this.authenticateUserGrocery(items)) ? "" : (
-                <button className="xBtn" onClick={this.delGrocery.bind(items, items.id)}>x</button>
-              )}
             </p>
+
             <p className="card-text">{items.description}</p>
-
+            {!(this.state.isUserAuth || this.authenticateUserGrocery(items)) ? "" : (
+                <button className="delete-grocery" onClick={this.delGrocery.bind(items, items.id)}>x</button>
+              )}
           </div>
-
         ))}
-        <br />
+        </div>
+          <div className="members">
+          <h5>Members:</h5>
+          {this.users(this.state.listView.users).map(user => (
+            <div className="member-users" key={user.id}>
+            <p key={user.id}>{user}</p>
+              <button className="delete-grocery" onClick={this.deleteUser.bind(user, user.id)}>x</button>
+            </div>
+          ))}
+        </div>
+        <div className="add-grocery">
+            <input placeholder="New grocery" id="NewGrocery" onChange={(v) => this.updateTitle(v.target.value)} />
+            <input placeholder="Description" id="Description" onChange={(v) => this.updateDescription(v.target.value)} />
+            <button className="submit" onClick={() => this.handleSubmit()}>Add Grocery</button>
+        </div>
+        
         {!(this.state.isUserAuth) ? "" : (
-          <div>
-            <p>
-              <input type="text" id="myInput" list="names" onChange={(v) => this.setUser(v.target.value)} placeholder="Search for users.." />
-              <datalist id="names"></datalist>
-              <button className="submit" onClick={() => this.addUser()}>Add User</button>
-            </p>
+          <div className="search-user">
+            <input type="text" id="myInput" list="names" onChange={(v) => this.setUser(v.target.value)} placeholder="Search for users.." />
+            <datalist id="names"></datalist>
+            <button className="submit" onClick={() => this.addUser()}>Add User</button>
           </div>
         )}
-        <div id="members">
-          <h5>Members:</h5><br />
-          {this.users(this.state.listView.users).map(user => (
-            <p>{user}
-              <button className="xBtn" onClick={this.deleteUser.bind(user, user.id)}>x</button></p>
-          ))}
-
-        </div>
       </div>
 
     )

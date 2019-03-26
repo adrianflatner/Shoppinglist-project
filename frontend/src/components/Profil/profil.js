@@ -14,10 +14,10 @@ class Profil extends Component{
         try{
             const username = this.auth.getUsername()
             this.setState({username : username});
-            console('username: ',{username});
+            console.log('username: ',{username});
             }
         catch (e){
-            console(e);
+            console.log(e);
         }
     }
 
