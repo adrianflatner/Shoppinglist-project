@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import './Shoppinglists.css';
 import userService from '../../_services/userService';
-
+import './Shoppinglist.css';
 
 class Shoppinglist extends Component {
 
@@ -426,6 +426,7 @@ class Shoppinglist extends Component {
     } catch (e) {
       console.log(e);
     }
+    document.getElementById("myInput").value=""
 
   }
 
@@ -505,68 +506,73 @@ class Shoppinglist extends Component {
 
   render() {
     return (
-      <div className="container">
-        <div>
-          <h3>{this.state.listView.title}</h3>
+      <div className="container-list">
+        <div className="title-box">
+          <h1>{this.state.listView.title}</h1>
         </div>
-        <br />
-        <div>
-          <p>
+        
+        
+
+        <div className="grocery-list"> 
+        {this.state.groceries.map(items => (
+          <div key={items.id} className="listetittel">
+            <p style={{ textDecoration: items.completed ? 'line-through' : 'none' }} className="cardtitle">
+              <input name="checkbox" type="checkbox" onChange={this.markComplete.bind(items, items.id)} />{' '}
+              {items.title}
+            </p>
+            <p className="comment">{items.completed ? "Kjøpt av "+ this.userNameFromId(items.completedBy): ""}</p>
+
+            <p className="card-text">{items.description}</p>
+            {!(this.state.isUserAuth || this.authenticateUserGrocery(items)) ? "" : (
+                <button className="delete-grocery" onClick={this.delGrocery.bind(items, items.id)}>x</button>
+              )}
+              
+          </div>
+        ))}
+        </div>
+        
+        <div className="members">
+          <h5>Author:</h5><br />
+          <p>{this.userNameFromId(this.state.listView.author)}</p><br/>
+          <h5>Members:</h5>
+          {this.users(this.state.listView.users).map(user => (
+            <p>{user}
+              {!((this.state.isUserAuth || this.auth.getUsername()===user) && this.idFromUsername(user)!==this.state.listView.author ) ? "" : (
+              <button className="delete-grocery" onClick={()=>this.deleteUser(user)}>x</button>)}</p>
+          ))}
+        </div>
+        <div className="add-grocery">
             <input placeholder="New grocery" id="NewGrocery" onChange={(v) => this.updateTitle(v.target.value)} />
             <input placeholder="Description" id="Description" onChange={(v) => this.updateDescription(v.target.value)} />
             <button className="submit" onClick={() => this.handleSubmit()}>Add Grocery</button>
-          </p>
         </div>
-        <br />
-        {this.state.groceries.map(items => (
-          <div className="listetittel">
-            <h5 style={{ textDecoration: items.completed ? 'line-through' : 'none' }} className="listetittel">
-              <input name="checkbox" type="checkbox" onChange={this.markComplete.bind(items, items.id)} />{' '}
-              {items.title}
-              {!(this.state.isUserAuth || this.authenticateUserGrocery(items)) ? "" : (
-                <button className="xBtn" onClick={this.delGrocery.bind(items, items.id)}>x</button>
-              )}
-            </h5>
-            <p> {items.description}</p>
-            <p className="comment">{items.completed ? "Kjøpt av "+ this.userNameFromId(items.completedBy): ""}</p>
-             </div>
 
-        ))}
 
-        <br />
+        
+
         {!(this.state.isUserAuth) ? "" : (
-          <div className="add-user">
-            <p>
-              <input type="text" id="myInput" list="names" onChange={(v) => this.setUser(v.target.value)} placeholder="Search for users.." />
-              <datalist id="names"></datalist>
-              <button className="submit" onClick={() => this.addUser()}>Add User</button>
-            </p>
+          <div className="search-user">
+            <input type="text" id="myInput" list="names" onChange={(v) => this.setUser(v.target.value)} placeholder="Search for users.." />
+            <datalist id="names"></datalist>
+            <button className="submit" onClick={() => this.addUser()}>Add User</button>
           </div>
         )}
-          <br />
-          <br />
-        <div id="members">
-          <h5>Author:</h5><br />
-          <p>{this.userNameFromId(this.state.listView.author)}</p><br/>
-          <h5>Members:</h5><br />
-          {this.users(this.state.listView.users).map(user => (
-            <p>{user}
-              {!((this.state.isUserAuth || this.auth.getUsername()===user) && this.idFromUsername(user)!==this.state.newItem.author ) ? "" : (
-              <button className="xBtn" onClick={()=>this.deleteUser(user)}>x</button>)}</p>
-          ))}
-        </div>
 
+      
+        
+          
+        <div className="comments">
         <h4>Comments</h4>
         {this.state.relatedComments.map(items => (
-          <div className="boxNewComment">
+          <div className="commentbox">
            
            <div>  
             <h6 className="comment-username">{this.userNameFromId(items.author)}</h6> <br />
            </div>
            
-           <div>< br/>
+           <div>
            <p>{items.comment} {!(this.state.isUserAuth || this.auth.getUsername()===this.userNameFromId(items.author)) ? "" : (
-                <button className="xBtn" onClick={()=>this.deleteComment(items)} >x</button>
+                <button className="delete-grocery" onClick={()=>this.deleteComment(items)} >x</button>
 
               )}</p>
            
@@ -586,6 +592,9 @@ class Shoppinglist extends Component {
           </div> 
         </div>
         <button className="submit" onClick={() => this.handleCommentSubmit()}>Comment</button>
+
+      </div>
+           
 
       </div>
 

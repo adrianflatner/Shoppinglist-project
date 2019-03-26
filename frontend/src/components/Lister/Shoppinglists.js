@@ -152,28 +152,30 @@ class Shoppinglists extends Component {
   render() {
     return (
       <div className="container">
-        Welcome, {this.auth.getUsername()}
+        <h2>Welcome, {this.auth.getUsername()}</h2>
+        
+        <div className="shopping-list">
         {this.state.userLists.map(items => (
 
           <div key={items.id} className="listetittel">
             <Link key={items.id} to={`/items/${items.id}`}>
-              <h3 className="listetittel">{items.title}</h3>
+              {items.title}
             </Link>
+            <p className="card-title">{items.description}</p>
             {!(this.authenticateUser(items)) ? "" : (
-            <button className="xBtn" onClick={this.delList.bind(items, items.id)}>x</button>
+            <p className="xBtn" onClick={this.delList.bind(items, items.id)}>x</p>
             )}
-            <p className="comment">{items.description}</p>
           </div>
-
-
         ))}
-        <div>
-          <p>
+        </div>
+        
+        
+          <div classname="add-list">
             <input placeholder="Name of list" id="NewList" onChange={(v) => this.updateTitle(v.target.value)} />
             <input placeholder="Description" id="Description" onChange={(v) => this.updateDescription(v.target.value)} />
             <button className="submit" onClick={() => this.handleSubmit()}>Add list</button>
-          </p>
-        </div>
+          </div>
+        
       </div>
     )
   }

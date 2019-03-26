@@ -42,7 +42,7 @@ GroceryItem.propTypes = {
     groceries: PropTypes.object.isRequired
 }
 
-const btnStyle = {
+/*const btnStyle = {
     background: '#ff0000',
     color: '#fff',
     border: 'none',
@@ -52,4 +52,4 @@ const btnStyle = {
     float: 'right'
 
 }
-
+*/
