@@ -163,14 +163,14 @@ class Shoppinglists extends Component {
             </Link>
             <p className="card-title">{items.description}</p>
             {!(this.authenticateUser(items)) ? "" : (
-            <p className="xBtn" onClick={this.delList.bind(items, items.id)}>x</p>
+            <button className="xBtn" onClick={this.delList.bind(items, items.id)}>x</button>
             )}
           </div>
         ))}
         </div>
         
         
-          <div classname="add-list">
+          <div className="add-list">
             <input placeholder="Name of list" id="NewList" onChange={(v) => this.updateTitle(v.target.value)} />
             <input placeholder="Description" id="Description" onChange={(v) => this.updateDescription(v.target.value)} />
             <button className="submit" onClick={() => this.handleSubmit()}>Add list</button>

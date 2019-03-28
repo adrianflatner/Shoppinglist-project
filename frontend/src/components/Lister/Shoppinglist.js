@@ -508,7 +508,7 @@ class Shoppinglist extends Component {
     return (
       <div className="container-list">
         <div className="title-box">
-          <h1>{this.state.listView.title}</h1>
+          <h1 className="title">{this.state.listView.title}</h1>
         </div>
         
         
@@ -530,7 +530,19 @@ class Shoppinglist extends Component {
           </div>
         ))}
         </div>
+
         
+        
+        <div className="row2">
+
+
+        <div className="add-grocery">
+            <input placeholder="New grocery" id="NewGrocery" onChange={(v) => this.updateTitle(v.target.value)} />
+            <input placeholder="Description" id="Description" onChange={(v) => this.updateDescription(v.target.value)} />
+            <button className="submit" onClick={() => this.handleSubmit()}>Add Grocery</button>
+          </div>
+
+
         <div className="members">
           <h5>Author:</h5><br />
           <p>{this.userNameFromId(this.state.listView.author)}</p><br/>
@@ -541,13 +553,6 @@ class Shoppinglist extends Component {
               <button className="delete-grocery" onClick={()=>this.deleteUser(user)}>x</button>)}</p>
           ))}
         </div>
-        <div className="add-grocery">
-            <input placeholder="New grocery" id="NewGrocery" onChange={(v) => this.updateTitle(v.target.value)} />
-            <input placeholder="Description" id="Description" onChange={(v) => this.updateDescription(v.target.value)} />
-            <button className="submit" onClick={() => this.handleSubmit()}>Add Grocery</button>
-        </div>
-
-
         
 
         {!(this.state.isUserAuth) ? "" : (
@@ -558,9 +563,12 @@ class Shoppinglist extends Component {
           </div>
         )}
 
+          
+        </div>
+
       
         
-          
+         {/* 
         <div className="comments">
         <h4>Comments</h4>
         {this.state.relatedComments.map(items => (
@@ -593,7 +601,7 @@ class Shoppinglist extends Component {
         </div>
         <button className="submit" onClick={() => this.handleCommentSubmit()}>Comment</button>
 
-      </div>
+           </div>*/}
            
 
       </div>

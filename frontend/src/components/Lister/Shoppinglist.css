@@ -1,75 +1,138 @@
 .delete-grocery{
-    background: #ff4040;
-    color: white;
-    padding: 13px;
-    text-align: center;
-    vertical-align: middle;
-    display: inline-block;
-    line-height: 0px;
-    text-indent: -3px;
-    border-radius: 50%;
-    height: 5px;
-    width: 5px;
+  background: #ff4040;
+  color: white;
+  padding: 13px;
+  text-align: center;
+  border: none;
+  vertical-align: middle;
+  display: inline-block;
+  line-height: 0px;
+  text-indent: -3px;
+  border-radius: 50%;
+  height: 5px;
+  width: 5px;
 }
 
 .container-list{
-    display: grid;
-    margin-top: 100px;
-    margin:5%;
-    margin-top: 100px;
-    grid-template-areas: 
-    "header header header header"
-    "liste liste annet members"
-    "liste liste annet add-user"
-    "add-grocery add-grocery footer footer";
+  margin: auto;
+  margin-top: 100px;
+}
+
+.title{
+  float: left;
 }
 
 /*css for shoppinglist*/
+@keyframes slide-up {
+0% {
+    opacity: 0;
+    transform: translateY(20px);
+}
+100% {
+    opacity: 1;
+    transform: translateY(0);
+}
+}
+
+.row2 {
+float: left;
+width: 40%;
+}
+
 .grocery-list{
-    grid-area: liste;
-    flex-direction: column;
-    max-height: 70px;
-    margin-right: 40px;
+display: grid;
+padding: 2%;
+float: left;
+width: 50%;
+}
+
+.add-grocery, .search-user{
+float:left;
+margin-left: 20px;
+margin-top: 20px;
+max-width: 250px;;
+}
+
+.add-grocery{
+display: grid;
+margin-right: 40px;
+}
+
+.search-user{
+display: grid;
+}
+
+.title-box {
+margin: 8% 50% 2% 50%;
+}
+
+.members {
+background-color:	#f8f8f8;
+display: grid;
+max-width: 300px;
+}
+.listetittel{
+max-height: 70px;
+animation: slide-up 0.4s ease;
+}
+.members h5 {
+justify-self: center;
+}
+
+.member-users {
+display: grid;
+grid-template-columns: repeat(3, 1fr);
+align-items: center;
+justify-items: center;
+}
+
+.member-users button {
+grid-column: 3;
+}
+
+
+.comment{
+  margin-bottom: 20px;
+  border-bottom: 1px solid #ccc;
+}
+
+.commentbox{
+  background-color: #fff;
+  box-shadow: 0 1px 4px rgba(0,0,0,.03);
+  border: 1px  solid rgba(0,0,0,.04);
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 20px;
+  margin-bottom: 15px;
+  width: 60%
+}
+
+
+.boxNewComment{
+  background-color: #fff;
+  box-shadow: 0 1px 4px rgba(0,0,0,.03);
+  border: 1px solid rgba(0,0,0,.04);
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 20px;
+  margin-bottom: 15px;
+  width: 40%
+
+}
+
+#NewComment {
+  border: none;
+  outline: none;
   
-  }
-  .add-grocery, .search-user{
-    margin-top: 20px;
-    display: grid;
-    justify-self: flex-end;
-    align-self: center;
-  }
+
+}
   
-  .add-grocery{
-    grid-area: footer;
-  }
-  
-  .search-user{
-    grid-area: add-user;
-  }
-  
-  .title-box {
-    grid-area: header;
-    justify-self: center;
-    align-self: center;
-  }
-  
-  .members {
-    background-color:	#f8f8f8;
-    grid-area: members;
-    display: grid;
-  }
-  
-  .members h5 {
-    justify-self: center;
-  }
-  
-  .member-users {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    align-items: center;
-    justify-items: center;
-  }
-  
-  .member-users button {
-    grid-column: 3;
-  }
+.comment-username {
+  color: #2C3E50; 
+}
+
+
+
+
