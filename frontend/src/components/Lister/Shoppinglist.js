@@ -433,7 +433,7 @@ class Shoppinglist extends Component {
     //Calls api and deletes user from list
  async deleteUser(user){
    console.log(user)
-  /* var userid=this.idFromUsername(user)
+  var userid=this.idFromUsername(user)
 
   for( var i = 0; i < this.state.listView.users.length; i++){ 
     if ( this.state.listView.users[i] === userid) {
@@ -442,7 +442,7 @@ class Shoppinglist extends Component {
   }
    console.log(this.state.listView)
    console.log(this.state.newItem.author)
-   */
+   
   
    try {
     var id = window.location.pathname.match(/\d+/)[0];
