@@ -433,7 +433,7 @@ class Shoppinglist extends Component {
     //Calls api and deletes user from list
  async deleteUser(user){
    console.log(user)
-   var userid=this.idFromUsername(user)
+  /* var userid=this.idFromUsername(user)
 
   for( var i = 0; i < this.state.listView.users.length; i++){ 
     if ( this.state.listView.users[i] === userid) {
@@ -442,7 +442,7 @@ class Shoppinglist extends Component {
   }
    console.log(this.state.listView)
    console.log(this.state.newItem.author)
-   
+   */
   
    try {
     var id = window.location.pathname.match(/\d+/)[0];
@@ -484,7 +484,7 @@ class Shoppinglist extends Component {
     }
 
   }
-  /*myFunction() {
+  myFunction() {
     // Declare variables
     var input, filter, ul, li, a, i, txtValue;
     input = document.getElementById('myInput');
@@ -502,7 +502,7 @@ class Shoppinglist extends Component {
         li[i].style.display = "none";
       }
     }
-  }*/
+  }
 
   render() {
     return (
@@ -531,44 +531,38 @@ class Shoppinglist extends Component {
         ))}
         </div>
 
-        
-        
-        <div className="row2">
-
 
         <div className="add-grocery">
             <input placeholder="New grocery" id="NewGrocery" onChange={(v) => this.updateTitle(v.target.value)} />
             <input placeholder="Description" id="Description" onChange={(v) => this.updateDescription(v.target.value)} />
             <button className="submit" onClick={() => this.handleSubmit()}>Add Grocery</button>
-          </div>
+        </div>
 
 
         <div className="members">
-          <h5>Author:</h5><br />
-          <p>{this.userNameFromId(this.state.listView.author)}</p><br/>
+          <h5>Admin:</h5>
+          <div className="member-users">{this.userNameFromId(this.state.listView.author)}</div>
           <h5>Members:</h5>
           {this.users(this.state.listView.users).map(user => (
-            <p>{user}
+            <div className="member-users">
+            <div key={user.id}>{user}</div>
               {!((this.state.isUserAuth || this.auth.getUsername()===user) && this.idFromUsername(user)!==this.state.listView.author ) ? "" : (
-              <button className="delete-grocery" onClick={()=>this.deleteUser(user)}>x</button>)}</p>
+              <button className="delete-grocery" onClick={()=>this.deleteUser(user)}>x</button>)}
+          </div>
           ))}
         </div>
         
 
         {!(this.state.isUserAuth) ? "" : (
           <div className="search-user">
-            <input type="text" id="myInput" list="names" onChange={(v) => this.setUser(v.target.value)} placeholder="Search for users.." />
+            <input id="myInput" list="names" onChange={(v) => this.setUser(v.target.value)} placeholder="Search for users.." />
             <datalist id="names"></datalist>
             <button className="submit" onClick={() => this.addUser()}>Add User</button>
           </div>
         )}
 
-          
-        </div>
 
-      
-        
-         {/* 
+         {
         <div className="comments">
         <h4>Comments</h4>
         {this.state.relatedComments.map(items => (
@@ -601,7 +595,7 @@ class Shoppinglist extends Component {
         </div>
         <button className="submit" onClick={() => this.handleCommentSubmit()}>Comment</button>
 
-           </div>*/}
+           </div>}
            
 
       </div>

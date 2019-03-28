@@ -1,3 +1,67 @@
+.container-list{
+  display: grid;
+  margin: 10%;
+  grid-template-areas: 
+  "header header k k"
+  "a a a b"
+  "c c c d"
+  "e e e g"
+  "comment comment comment comment";
+  margin-top: 100px;
+
+}
+
+.title-box{
+  grid-area: header;
+  justify-self: center;
+  margin-bottom: 3%;
+}
+
+.grocery-list{
+  grid-area: a;
+}
+
+.add-grocery, .search-user{
+  justify-self: center;
+  align-self: center;
+}
+.add-grocery{
+  display: grid;
+  grid-area: b;
+}
+
+.search-user{
+  display: grid;
+  margin-top: 2vh;
+  grid-area: g;
+}
+
+.members h5 {
+  justify-self: center;
+}
+
+.members {
+  margin-top: 2vh;
+  background-color:	#f8f8f8;
+  display: grid;
+  grid-area: d;
+}
+
+.member-users {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  align-items: center;
+  justify-items: center;
+}
+
+.member-users button {
+  grid-column: 3;
+}
+
+.comments{
+  grid-area: comment;
+}
+
 .delete-grocery{
   background: #ff4040;
   color: white;
@@ -12,84 +76,6 @@
   height: 5px;
   width: 5px;
 }
-
-.container-list{
-  margin: auto;
-  margin-top: 100px;
-}
-
-.title{
-  float: left;
-}
-
-/*css for shoppinglist*/
-@keyframes slide-up {
-0% {
-    opacity: 0;
-    transform: translateY(20px);
-}
-100% {
-    opacity: 1;
-    transform: translateY(0);
-}
-}
-
-.row2 {
-float: left;
-width: 40%;
-}
-
-.grocery-list{
-display: grid;
-padding: 2%;
-float: left;
-width: 50%;
-}
-
-.add-grocery, .search-user{
-float:left;
-margin-left: 20px;
-margin-top: 20px;
-max-width: 250px;;
-}
-
-.add-grocery{
-display: grid;
-margin-right: 40px;
-}
-
-.search-user{
-display: grid;
-}
-
-.title-box {
-margin: 8% 50% 2% 50%;
-}
-
-.members {
-background-color:	#f8f8f8;
-display: grid;
-max-width: 300px;
-}
-.listetittel{
-max-height: 70px;
-animation: slide-up 0.4s ease;
-}
-.members h5 {
-justify-self: center;
-}
-
-.member-users {
-display: grid;
-grid-template-columns: repeat(3, 1fr);
-align-items: center;
-justify-items: center;
-}
-
-.member-users button {
-grid-column: 3;
-}
-
 
 .comment{
   margin-bottom: 20px;

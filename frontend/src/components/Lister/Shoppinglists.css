@@ -13,6 +13,7 @@
   /*css for shoppinglists*/
   /* grid-area: where html tag will be in grid + other css adjustments */
 .container h2{
+    padding-bottom: 5vh;
     grid-area: header;
     justify-self: center;
 }
@@ -20,22 +21,18 @@
 .add-list{
     grid-area: d;
     justify-self: center;
-    max-width: 250px;
     align-self: center;
+    display: grid;
 }
   
-.add-list .submit{
-    width: 209.267px;
-}
 .shopping-list{
     grid-area: a;
 }
   
 .listetittel {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(4, 1fr);
     border-bottom: 1px solid #ccc;
-    height: 100%;
     width: 100%;
     justify-items: left;
     align-items: center;
@@ -45,12 +42,11 @@
     text-decoration: none;
     color: black;
 }
-.cardtitle{
-    font-size: 20px;
+.card-title{
     grid-column: auto;
+    margin: 0;
 }
-  
-  
+   
 .submit {
     border: none;
     background-color:  	#606060;

@@ -161,7 +161,7 @@ class Shoppinglists extends Component {
             <Link key={items.id} to={`/items/${items.id}`}>
               {items.title}
             </Link>
-            <p className="card-title">{items.description}</p>
+            <div className="card-title">{items.description}</div>
             {!(this.authenticateUser(items)) ? "" : (
             <button className="xBtn" onClick={this.delList.bind(items, items.id)}>x</button>
             )}
