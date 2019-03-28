@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     'list',
     'groceries',
     'comments',
+    'userprofile'
 ]
 
 REST_FRAMEWORK = {
