@@ -41,6 +41,10 @@
   align-items: center;
 }
 
+.listetittel a {
+  text-decoration: none;
+  color: black;
+}
 .cardtitle{
   font-size: 20px;
   grid-column: auto;

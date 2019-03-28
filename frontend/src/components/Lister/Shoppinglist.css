@@ -3,6 +3,7 @@
     color: white;
     padding: 13px;
     text-align: center;
+    border: none;
     vertical-align: middle;
     display: inline-block;
     line-height: 0px;
@@ -13,63 +14,73 @@
 }
 
 .container-list{
-    display: grid;
+    margin: auto;
     margin-top: 100px;
-    margin:5%;
-    margin-top: 100px;
-    grid-template-areas: 
-    "header header header header"
-    "liste liste annet members"
-    "liste liste annet add-user"
-    "add-grocery add-grocery footer footer";
 }
 
 /*css for shoppinglist*/
+@keyframes slide-up {
+  0% {
+      opacity: 0;
+      transform: translateY(20px);
+  }
+  100% {
+      opacity: 1;
+      transform: translateY(0);
+  }
+}
+
+.row2 {
+  float: left;
+  width: 40%;
+}
+
 .grocery-list{
-    grid-area: liste;
-    flex-direction: column;
-    max-height: 70px;
-  
-  }
-  .add-grocery, .search-user{
-    margin-top: 20px;
-    display: grid;
-    justify-self: flex-end;
-    align-self: center;
-  }
-  
-  .add-grocery{
-    grid-area: footer;
-  }
-  
-  .search-user{
-    grid-area: add-user;
-  }
-  
-  .title-box {
-    grid-area: header;
-    justify-self: center;
-    align-self: center;
-  }
-  
-  .members {
-    background-color:	#f8f8f8;
-    grid-area: members;
-    display: grid;
-  }
-  
-  .members h5 {
-    justify-self: center;
-  }
-  
-  .member-users {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    align-items: center;
-    justify-items: center;
-  }
-  
-  .member-users button {
-    grid-column: 3;
-  }
-  
+  display: grid;
+  padding: 5%;
+  float: left;
+  width: 50%;
+}
+
+.add-grocery, .search-user{
+  float:left;
+  margin-left: 20px;
+  margin-top: 20px;
+  max-width: 250px;;
+}
+
+.add-grocery{
+  display: grid;
+}
+
+.search-user{
+  display: grid;
+}
+
+.title-box {
+  margin: 8% 50% 2% 50%;
+}
+
+.members {
+  background-color:	#f8f8f8;
+  display: grid;
+  max-width: 550px;
+}
+.listetittel{
+  max-height: 70px;
+  animation: slide-up 0.4s ease;
+}
+.members h5 {
+  justify-self: center;
+}
+
+.member-users {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  align-items: center;
+  justify-items: center;
+}
+
+.member-users button {
+  grid-column: 3;
+}

@@ -355,7 +355,8 @@ class Shoppinglist extends Component {
               )}
           </div>
         ))}
-        </div>
+        </div> 
+        <div className="row2">
           <div className="members">
           <h5>Members:</h5>
           {this.users(this.state.listView.users).map(user => (
@@ -365,12 +366,6 @@ class Shoppinglist extends Component {
             </div>
           ))}
         </div>
-        <div className="add-grocery">
-            <input placeholder="New grocery" id="NewGrocery" onChange={(v) => this.updateTitle(v.target.value)} />
-            <input placeholder="Description" id="Description" onChange={(v) => this.updateDescription(v.target.value)} />
-            <button className="submit" onClick={() => this.handleSubmit()}>Add Grocery</button>
-        </div>
-        
         {!(this.state.isUserAuth) ? "" : (
           <div className="search-user">
             <input type="text" id="myInput" list="names" onChange={(v) => this.setUser(v.target.value)} placeholder="Search for users.." />
@@ -378,6 +373,12 @@ class Shoppinglist extends Component {
             <button className="submit" onClick={() => this.addUser()}>Add User</button>
           </div>
         )}
+        <div className="add-grocery">
+            <input placeholder="New grocery" id="NewGrocery" onChange={(v) => this.updateTitle(v.target.value)} />
+            <input placeholder="Description" id="Description" onChange={(v) => this.updateDescription(v.target.value)} />
+            <button className="submit" onClick={() => this.handleSubmit()}>Add Grocery</button>
+        </div>
+      </div>
       </div>
 
     )
