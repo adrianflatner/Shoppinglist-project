@@ -9,7 +9,7 @@ class Userprofile(models.Model):
 
     def __str__(self):
         """A string representation of the model."""
-        return self.comment
+        return self.user.username
 
 
 
