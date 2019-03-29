@@ -11,10 +11,26 @@
 
 }
 
+.grocerytittel {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  border-bottom: 1px solid #ccc;
+  width: 100%;
+  justify-items: left;
+  align-items: center;
+  margin-bottom: 20px;
+  max-width: 100%;
+  min-width: 100%;
+}
+
 .title-box{
   grid-area: header;
-  justify-self: center;
+  
   margin-bottom: 3%;
+}
+
+.card-text{
+  justify-self: center;
 }
 
 .grocery-list{
@@ -37,7 +53,8 @@
 }
 
 .members h5 {
-  justify-self: center;
+  justify-self: left;
+  margin-left:5px
 }
 
 .members {
@@ -45,13 +62,17 @@
   background-color:	#f8f8f8;
   display: grid;
   grid-area: d;
+  width: 209.206px;
+  justify-self: center;
 }
 
 .member-users {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(2, 1fr);
   align-items: center;
-  justify-items: center;
+  justify-items: left;
+  margin-left: 5px;
+  margin-bottom: 3px
 }
 
 .member-users button {
@@ -75,11 +96,22 @@
   border-radius: 50%;
   height: 5px;
   width: 5px;
+  justify-self: right;
 }
 
 .comment{
   margin-bottom: 20px;
-  border-bottom: 1px solid #ccc;
+  
+  justify-self: center;
+  width:70%;
+}
+
+.no-comment{
+  margin-bottom: 20px;
+  
+  justify-self: center;
+  color: #fff;
+  width:70%
 }
 
 .commentbox{
@@ -119,6 +151,25 @@
   color: #2C3E50; 
 }
 
+.delete-comment{
+  background-color: #606060;
+  border-color: rgba(0,0,0,.04);
+  color: #fff;
+  float: right;;
+  
+}
+
+.comment-comment{
+  width:410;
+}
+
+.comment-line{
+  width:200%;
+}
+
+.comment-name{
+  margin-right: 7px;
+}
 
 
 

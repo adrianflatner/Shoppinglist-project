@@ -158,7 +158,7 @@ class Shoppinglists extends Component {
         {this.state.userLists.map(items => (
 
           <div key={items.id} className="listetittel">
-            <Link key={items.id} to={`/items/${items.id}`}>
+            <Link className='list-title' key={items.id} to={`/items/${items.id}`}>
               {items.title}
             </Link>
             <div className="card-title">{items.description}</div>

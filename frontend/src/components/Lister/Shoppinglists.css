@@ -3,7 +3,7 @@
     margin-top: 100px;
     grid-template-areas: 
     "header header header header"
-    "a a a d"
+    "a e e d"
     "b b b d"
     "c c c d";
     margin:5%;
@@ -26,25 +26,34 @@
 }
   
 .shopping-list{
-    grid-area: a;
+    grid-area: e;
+    max-width: 70%;
+    
 }
   
 .listetittel {
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(3, 1fr);
     border-bottom: 1px solid #ccc;
     width: 100%;
     justify-items: left;
     align-items: center;
+    margin-bottom: 20px;
 }
+
+
+
   
 .listetittel a {
     text-decoration: none;
     color: black;
+    font-size: 25px;
 }
 .card-title{
     grid-column: auto;
     margin: 0;
+    font-size: 17px;
+    justify-self: center;
 }
    
 .submit {
@@ -70,6 +79,9 @@
   border-radius: 50%;
   height: 5px;
   width: 5px;
+  justify-self: right
+  
+  
 }
   
 #myInput, #Description, #NewGrocery, #NewList {

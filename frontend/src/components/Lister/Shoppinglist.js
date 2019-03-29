@@ -515,13 +515,18 @@ class Shoppinglist extends Component {
 
         <div className="grocery-list"> 
         {this.state.groceries.map(items => (
-          <div key={items.id} className="listetittel">
+          <div key={items.id} className="grocerytittel">
             <p style={{ textDecoration: items.completed ? 'line-through' : 'none' }} className="cardtitle">
               <input name="checkbox" type="checkbox" onChange={this.markComplete.bind(items, items.id)} />{' '}
               {items.title}
             </p>
-            <p className="comment">{items.completed ? "Kjøpt av "+ this.userNameFromId(items.completedBy): ""}</p>
+            {!(items.completed) ? "":(
+            <p className="comment">{"Kjøpt av "+ this.userNameFromId(items.completedBy)}</p>
+            )}
 
+            {!(items.completed==false) ? "":(
+              <p className="no-comment">{"Kjøpt av "} ingen</p>
+            )}
             <p className="card-text">{items.description}</p>
             {!(this.state.isUserAuth || this.authenticateUserGrocery(items)) ? "" : (
                 <button className="delete-grocery" onClick={this.delGrocery.bind(items, items.id)}>x</button>
@@ -568,15 +573,14 @@ class Shoppinglist extends Component {
         {this.state.relatedComments.map(items => (
           <div className="commentbox">
            
-           <div>  
+           <div className='comment-name'>  
             <h6 className="comment-username">{this.userNameFromId(items.author)}</h6> <br />
            </div>
            
-           <div>
-           <p>{items.comment} {!(this.state.isUserAuth || this.auth.getUsername()===this.userNameFromId(items.author)) ? "" : (
-                <button className="delete-grocery" onClick={()=>this.deleteComment(items)} >x</button>
-
-              )}</p>
+           <div className='comment-line'><br />
+           <p className='comment-comment'>{items.comment} {!(this.state.isUserAuth || this.auth.getUsername()===this.userNameFromId(items.author)) ? "" : (
+                <button className="delete-comment" onClick={()=>this.deleteComment(items)} >Delete</button>
+           )} </p>
            
            </div>
            
