@@ -154,7 +154,7 @@ class Shoppinglists extends Component {
       <div className="container">
         <h2>Welcome, {this.auth.getUsername()}</h2>
         
-        <div className="shopping-list">
+        <div className="shopping-list"><h3>Dine lister</h3>
         {this.state.userLists.map(items => (
 
           <div key={items.id} className="listetittel">
