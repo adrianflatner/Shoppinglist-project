@@ -7,8 +7,10 @@ class Profil extends Component{
         this.state={
             username: "",
             userID: "",
+            userprofile: [],
             allergies: [],
-            newAllergy: ""
+            newAllergy: "",
+            newUserprofile:""
         }
         this.auth = new userService();
     }
@@ -26,19 +28,32 @@ class Profil extends Component{
         }
     }
 
-    // Fetches allergies
-    async updateAllergies(){
-        try{
-            const res = await fetch('http://127.0.0.1:8000/api/userprofiles', 
+    // Fetches allergies or creates a new userprofile.
+    async updateUserprofile(){
+            var res = await fetch(`http://127.0.0.1:8000/api/userprofiles/${this.state.userID}/`, 
                 {headers: { 'Authorization': "Token " + localStorage.getItem('id_token'), 'Content-Type': 'application/json' }
             })
-            const userprofile = res.json();
-            this.setState({allergies : userprofile.allergies});
-            console.log("Allergies: ", this.state.allergies)
+            if(res.status === 404){
+                this.createNewUserprofile();
+                const res1 = await fetch(`http://127.0.0.1:8000/api/userprofiles`, {
+                body: JSON.stringify(this.state.newUserprofile),
+                method: 'POST',
+                headers: { 'Authorization': "Token " + localStorage.getItem('id_token'), 'Content-Type': 'application/json' },
+              });
+              if (res1.ok) {
+                await this.updateUserprofile();
+              };
+            }
+            else{
+            const userprofile = await res.json();
+            this.setState({
+                userprofile : userprofile,
+                allergies : userprofile.allergies,
+            });
         }
-        catch (e){
-            console.log(e);
-        }
+      
+        
+        
     }
 
     // Fetches the userID that are used for fetching information from backend.
@@ -50,7 +65,7 @@ class Profil extends Component{
             const users = await res.json();
             users.forEach(user => {
                 if( user.username == this.state.username){
-                    this.setState({userID: user.username})
+                    this.setState({userID: user.id})
                 }
             });
           } catch (e) {
@@ -58,23 +73,43 @@ class Profil extends Component{
           }
     }
 
+    createNewUserprofile(){
+        this.setState({
+            newUserprofile: { user: this.state.userID, bio: "", allergies: "" }
+        })
+    }
+
     // Function for handling changes in the allergy inputfield.
     handleChange(args){
         this.setState({
-            newAllergy: args.target.value
+            newAllergy: args.target.value,
         });
+    }
+
+    deleteAllergies(){
+        this.setState({
+            newAllergy: ""
+        });
+        this.handleSubmission();
+    }
+
+    formatting(){
+        (this.state.newAllergy==="") ? this.state.userprofile.allergies = "" 
+        : ((this.state.userprofile.allergies === "") ? this.state.userprofile.allergies += this.state.newAllergy
+        : this.state.userprofile.allergies += ", " + this.state.newAllergy);
     }
 
     // Function for handling submition of allergies. Will be linked to userService, hence backend.
     async handleSubmission(){
+        this.formatting();
         try {
-            const res = await fetch('http://127.0.0.1:8000/api/groceries', {
-              body: this.state.newAllergy,
+            const res = await fetch(`http://127.0.0.1:8000/api/userprofiles/${this.state.userID}/`, {
+              body: JSON.stringify(this.state.userprofile),
               method: 'PUT',
               headers: { 'Authorization': "Token " + localStorage.getItem('id_token'), 'Content-Type': 'application/json' },
             });
             if (res.ok) {
-              await this.updateAllergies();
+              await this.updateUserprofile();
             }
             document.getElementById("newAllergy").value = "";
             this.setState({newAllergy : ""});
@@ -88,7 +123,7 @@ class Profil extends Component{
     async componentDidMount(){
         await this.updateUsername();
         await this.updateUserID();
-        await this.updateAllergies();
+        await this.updateUserprofile();
     }
 
     render(){
@@ -100,7 +135,7 @@ class Profil extends Component{
                     <h1 className="header">Profilepage</h1>
                     <h2>Username:{this.state.username}</h2>
                 </div>
-
+            
                 {/* Inputmodule for alergies. */}
                 <div className = "new-allergy">
                     {/* Header for the module. */}
@@ -123,7 +158,9 @@ class Profil extends Component{
 
                 {/* Grid showing an overview of current registered allergies. */}
                 <div className = "allergy-list">
-                    
+                    <h3>Allergies:</h3>
+                    {this.state.allergies}
+                    <button className="delete-comment" onClick={()=>this.deleteAllergies()} >Delete allergies</button>
                 </div>
             </div>
         )

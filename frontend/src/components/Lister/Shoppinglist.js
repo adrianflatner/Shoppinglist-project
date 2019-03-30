@@ -16,6 +16,8 @@ class Shoppinglist extends Component {
       user: [],
       comments: [],
       relatedComments: [],
+	  userprofiles: [],
+	  relatedUserprofiles: [],
       isUserAuth: false,
       newItem: { title: "", description: "", completed: false, author: "" },
       commentItem: { comment: "", author: "" },
@@ -37,6 +39,24 @@ class Shoppinglist extends Component {
       console.log(e);
     }
   }
+
+  // Fetches allergies
+  async _fetchUserprofiles(){
+    try{
+        const res = await fetch(`http://127.0.0.1:8000/api/userprofiles`, 
+            {headers: { 'Authorization': "Token " + localStorage.getItem('id_token'), 'Content-Type': 'application/json' }
+        })
+        const userprofiles = await res.json();
+        this.setState({
+            userprofiles : userprofiles,
+        });
+        
+    }
+    catch (e){
+        console.log(e);
+    }
+}
+
 
   // Fetches lists and adds them to state
   async _fetchList(id) {
@@ -88,8 +108,10 @@ class Shoppinglist extends Component {
     await this._fetchGroceries();
     await this._fetchList(window.location.pathname.match(/\d+/)[0]);
     await this._fetchUsers(window.location.pathname.match(/\d+/)[0]);
-    await this._fetchComments();
-    this.groceryID();
+	await this._fetchComments();
+	await this._fetchUserprofiles();
+	this.setRelatedUserprofiles();
+	this.groceryID();
     this.commentID();
     this.authenticateUser();
     this.setAuthor();
@@ -99,8 +121,17 @@ class Shoppinglist extends Component {
   setAuthor(){
     this.state.newItem.author = this.idFromUsername(this.auth.getUsername());
     this.state.commentItem.author = this.idFromUsername(this.auth.getUsername());
-    
+  }
 
+  setRelatedUserprofiles(){
+	this.setState({
+		relatedUserprofiles: []
+	})
+	this.state.userprofiles.forEach(userprofile => {
+		this.state.listView.users.forEach(member => {
+			if (userprofile.user === member){
+				this.state.relatedUserprofiles.push(userprofile);
+			}})});
   }
 
   // Checks if user is author of list
@@ -419,9 +450,7 @@ class Shoppinglist extends Component {
         headers: { 'Authorization': "Token " + localStorage.getItem('id_token'), 'Content-Type': 'application/json' },
       });
       if (res.ok) {
-        await this._fetchGroceries();
-        await this._fetchList(window.location.pathname.match(/\d+/)[0]);
-        await this._fetchUsers(window.location.pathname.match(/\d+/)[0]);
+        this.componentDidMount();
       }
     } catch (e) {
       console.log(e);
@@ -453,9 +482,7 @@ class Shoppinglist extends Component {
       headers: { 'Authorization': "Token " + localStorage.getItem('id_token'), 'Content-Type': 'application/json' },
     });
     if (res.ok) {
-      await this._fetchGroceries();
-      await this._fetchList(window.location.pathname.match(/\d+/)[0]);
-      await this._fetchUsers(window.location.pathname.match(/\d+/)[0]);
+		this.componentDidMount();
     }
   } catch (e) {
     console.log(e);
@@ -484,7 +511,7 @@ class Shoppinglist extends Component {
     }
 
   }
-  myFunction() {
+ /* myFunction() {
     // Declare variables
     var input, filter, ul, li, a, i, txtValue;
     input = document.getElementById('myInput');
@@ -502,7 +529,7 @@ class Shoppinglist extends Component {
         li[i].style.display = "none";
       }
     }
-  }
+  }*/
 
   render() {
     return (
@@ -555,6 +582,16 @@ class Shoppinglist extends Component {
               <button className="delete-grocery" onClick={()=>this.deleteUser(user)}>x</button>)}
           </div>
           ))}
+        </div>
+
+        <div>
+        	<h5>Allergies:</h5>
+			{this.state.relatedUserprofiles.map(userprofile => (
+				<p>{userprofile.allergies}</p>
+			
+			))}
+			{console.log("Her:"+this.state.relatedUserprofiles)}
+        
         </div>
         
 
