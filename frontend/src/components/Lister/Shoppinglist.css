@@ -60,11 +60,15 @@
 .members {
   margin-top: 2vh;
   background-color:	#f8f8f8;
+  box-shadow: 0 1px 4px rgba(0,0,0,.03);
+  border: 1px solid rgba(0,0,0,.04);
   display: grid;
   grid-area: d;
   width: 209.206px;
   justify-self: center;
 }
+
+
 
 .member-users {
   display: grid;
@@ -172,4 +176,28 @@
 }
 
 
+.add-allergy {
+  background-color: #606060;
+  border-color: rgba(0,0,0,.04);
+  color: #fff;
+}
 
+.allergy-list {
+  grid-area: a;
+  margin-left: 5 px;
+
+}
+
+.new-allergy{
+  margin-top: 15px;
+}
+
+
+.delete-allergies{
+  background-color: #606060;
+  border-color: rgba(0,0,0,.04);
+  color: #fff;
+  float: left;
+  margin-top: 3px;
+  
+}

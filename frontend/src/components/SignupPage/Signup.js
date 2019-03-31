@@ -35,11 +35,11 @@ class Signup extends Component{
   render(){
     return (
         <div className="grid">
-            <h1>Register</h1>
+            <h1 className="register-text">Register</h1>
             <p> Please fill in this form to create an account.</p>
-
-            <label htmlFor="uname"><b>Username</b></label>
             <div className="name">
+              <label htmlFor="uname"><b>Username</b></label>
+            
               <input 
               className="text-input"
               name="username" 
@@ -48,23 +48,26 @@ class Signup extends Component{
 
               onChange = {(...a) => this.handleChange(...a)}/>
             </div>
+            <div>
+              <label htmlFor="pword">
+                <b>Password</b>
+              </label>
+              <input 
+              className="text-input" 
+              name="password" 
+              placeholder="password" 
+              type = "password"
+              
+              onChange={(...a)=> this.handleChange(...a)}/>
 
-            <label htmlFor="pword">
-              <b>Password</b>
-            </label>
-            <input 
-            className="text-input" 
-            name="password" 
-            placeholder="password" 
-            type = "password"
-            
-            onChange={(...a)=> this.handleChange(...a)}/>
-
-            <label htmlFor="rpword"><b>Repeat password</b></label>
-            <input 
-            className="text-input"  
-            placeholder="repeat password"
-            type = "password"/>
+            </div>
+            <div>
+              <label htmlFor="rpword"><b>Repeat password</b></label>
+              <input 
+              className="text-input"  
+              placeholder="repeat password"
+              type = "password"/>
+            </div>
             
             <div className="button">
             <Link to={'/login'} onClick={()=> this.Login}>    

@@ -133,15 +133,15 @@ class Profil extends Component{
                 {/* Header shows username. */}
                 <div>
                     <h1 className="header">Profilepage</h1>
-                    <h2>Username:{this.state.username}</h2>
+                    <h3>Username: {this.state.username}</h3>
                 </div>
             
                 {/* Inputmodule for alergies. */}
                 <div className = "new-allergy">
                     {/* Header for the module. */}
-                    <h1 className = "login-text">
+                    <h3 className = "login-text">
                     Add new allergy
-                    </h1>
+                    </h3>
                     {/* Inputfield for specifying allergies. */}
                     <input className = "grid-input"
                     name = "allergy"
@@ -150,17 +150,17 @@ class Profil extends Component{
                     placeholder = "newAlergy"
                     onChange={(...a) => this.handleChange(...a)}/>
                     {/* Button for submitting text in above inputfield. */}
-                    <button className = "submitButton"
-                    onClick = {() => this.handleSubmission()}>
-                    submit
-                    </button>
+                    <button className="add-allergy" onClick = {() => this.handleSubmission() } >Submit</button>
                 </div>
 
                 {/* Grid showing an overview of current registered allergies. */}
                 <div className = "allergy-list">
                     <h3>Allergies:</h3>
+    
                     {this.state.allergies}
-                    <button className="delete-comment" onClick={()=>this.deleteAllergies()} >Delete allergies</button>
+                    <div>
+                    <button className="delete-allergies" onClick={()=>this.deleteAllergies()} >Delete allergies</button>
+                    </div>
                 </div>
             </div>
         )
