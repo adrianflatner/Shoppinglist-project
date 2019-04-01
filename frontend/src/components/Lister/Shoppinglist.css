@@ -3,7 +3,7 @@
   margin: 10%;
   grid-template-areas: 
   "header header k k"
-  "a a a b"
+  "a a f b"
   "c c c d"
   "e e e g"
   "comment comment comment allergi";
