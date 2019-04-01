@@ -6,7 +6,7 @@
   "a a a b"
   "c c c d"
   "e e e g"
-  "comment comment comment comment";
+  "comment comment comment allergi";
   margin-top: 100px;
 
 }
@@ -201,3 +201,20 @@
   margin-top: 3px;
   
 }
+
+.allergi{
+  
+  grid-area: allergi;
+  margin-top: 20px;
+  background-color:	#f8f8f8;
+  justify-self: left;
+  width: 209.206px;
+  justify-self: center;
+  max-height: 50%;
+}
+
+.allergi h5, p{
+  justify-self: left;
+  margin-left:5px;
+}
+

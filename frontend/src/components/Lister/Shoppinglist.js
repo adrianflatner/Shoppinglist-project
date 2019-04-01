@@ -584,7 +584,17 @@ class Shoppinglist extends Component {
           ))}
         </div>
 
-        <div>
+       
+
+        {!(this.state.isUserAuth) ? "" : (
+          <div className="search-user">
+            <input id="myInput" list="names" onChange={(v) => this.setUser(v.target.value)} placeholder="Search for users.." />
+            <datalist id="names"></datalist>
+            <button className="submit" onClick={() => this.addUser()}>Add User</button>
+          </div>
+        )}
+
+        <div className='allergi'>
         	<h5>Allergies:</h5>
 			{this.state.relatedUserprofiles.map(userprofile => (
 				<p>{userprofile.allergies}</p>
@@ -594,14 +604,6 @@ class Shoppinglist extends Component {
         
         </div>
         
-
-        {!(this.state.isUserAuth) ? "" : (
-          <div className="search-user">
-            <input id="myInput" list="names" onChange={(v) => this.setUser(v.target.value)} placeholder="Search for users.." />
-            <datalist id="names"></datalist>
-            <button className="submit" onClick={() => this.addUser()}>Add User</button>
-          </div>
-        )}
 
 
          {
