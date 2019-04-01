@@ -20,7 +20,7 @@ class NavBar extends Component{
             <nav className="nav">
                 <Link className="navbar-brand" to='/'>
                 Shopping List</Link>
-                <Link className="navbar-brand" to='/profil'>Profil</Link>
+                <Link className="navbar-brand" to='/profil'>Profil: {Auth.getUsername()}</Link>
                 <div className="navbar-brand" id="logout" onClick={this.handleLogout.bind(this)}>Logout</div>
                 
             </nav> :
