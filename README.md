@@ -1,7 +1,8 @@
 ### ShoppingList
 
 ShoppingList is an application that makes it easier for a group of people to share a common shopping list, regardless of time and place.
-You can find a guide on how to navigate through the projects repository, wiki and backlog [here](https://gitlab.stud.idi.ntnu.no/programvareutvikling-v19/gruppe-2/wikis/home)
+
+[Here](https://gitlab.stud.idi.ntnu.no/programvareutvikling-v19/gruppe-2/wikis/home) is a guide on how to navigate through the projects repository, wiki and backlog. 
 
 ### Motivation
 
