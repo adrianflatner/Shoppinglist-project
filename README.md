@@ -26,11 +26,12 @@ Clone this repository, then using a terminal, navigate to the frontend directory
 $ npm install
 ```
 
+**Running python**
 Check which version you have of python:
 ```
 $ python -V
 ```
-If you get python 2 use pip3 and python3 instead og pip and python in your terminal
+If you get python 2 use pip3 and python3 instead of pip and python in your terminal
 
 Navigate to backend and run the following: 
 ```
