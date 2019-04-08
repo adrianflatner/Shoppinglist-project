@@ -28,8 +28,10 @@ $ npm install
 
 Navigate to backend and run the following: 
 ```
-$ pip install Djangorestframework
-$ pip install NEED MORE HERE
+$ pip install django
+$ pip install djangorestframework
+$ pip install django-cors-headers
+$ pipenv install django-rest-auth
 
 ```
 
