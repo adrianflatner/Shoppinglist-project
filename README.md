@@ -48,6 +48,9 @@ Then open a new terminal and navigate to the backend directory an run the follow
 ```
 $ pipenv shell
 $ python manage.py runserver
+
+to exit shell:
+$ ctrl + d
 ```
 You will now be able to access the database server at http://127.0.0.1:8000/.
 
