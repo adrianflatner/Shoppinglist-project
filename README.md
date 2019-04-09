@@ -17,9 +17,11 @@ The project is separated into two main folders: backend and frontend. The backen
 
 To run this application on your local computer, you will need to have [Node.js](https://nodejs.org/en/) and [Django](https://docs.djangoproject.com/en/2.1/topics/install/#install-apache-and-mod-wsgi) installed. 
 
-Node version: 10.15.1
-Django version: 2.1.7
-Npm version: 6.8.0
+**Node version:** 10.15.1
+
+**Django version:** 2.1.7
+
+**Npm version:** 6.8.0
 
 
 
