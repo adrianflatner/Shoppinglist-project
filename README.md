@@ -19,13 +19,13 @@ To run this application on your local computer, you will need to have [Node.js](
 
 **Versions used for this project**
 
-*  Node version: 10.15.1
+*  Node: 10.15.1
 
-*  Npm version: 6.8.0
+*  Npm: 6.8.0
 
-*  Python version: 3.7.0
+*  Python: 3.7.0
 
-*  Django version: 2.1.7
+*  Django: 2.1.7
 
 
 
