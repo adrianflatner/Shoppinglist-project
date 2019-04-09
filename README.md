@@ -40,11 +40,12 @@ $ npm install
 ```
 
 **Running python**
+
 Check which version you have of python:
 ```
 $ python -V
 ```
-If you get python 2 use pip3 and python3 instead of pip and python in your terminal
+If you get python 1 or 2 use pip3 and python3 instead of pip and python in your terminal
 
 Navigate to backend and run the following: 
 ```
