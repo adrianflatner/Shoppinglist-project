@@ -41,11 +41,11 @@ $ npm install
 
 **Running python**
 
-Check which version you have of python:
+Check version of python:
 ```
 $ python -V
 ```
-If you get python 1 or 2 use pip3 and python3 instead of pip and python in your terminal
+If you get python 1 or 2 use pip3 and python3 instead of pip and python in your terminal.
 
 Navigate to backend and run the following: 
 ```
@@ -76,7 +76,7 @@ $ ctrl + d
 ```
 You will now be able to access the database server at http://127.0.0.1:8000/.
 
-If you have made changes to the bakckend, run the following: 
+If there are changes to the backend, run the following: 
 ```
 $ ctrl C (to exit)
 $ python manage.py makemigrations
