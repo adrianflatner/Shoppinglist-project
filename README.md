@@ -15,13 +15,20 @@ The project is separated into two main folders: backend and frontend. The backen
 ### Running
 **Getting started**
 
-To run this application on your local computer, you will need to have [Node.js](https://nodejs.org/en/) and [Django](https://docs.djangoproject.com/en/2.1/topics/install/) installed. 
+To run this application on your local computer, you will need to have [Node.js](https://nodejs.org/en/), [Python](https://www.python.org/downloads/) and [Django](https://docs.djangoproject.com/en/2.1/topics/install/) installed. 
+
+**Versions used for this project**
 
 *  Node version: 10.15.1
 
+*  Npm version: 6.8.0
+
+*  Python version: 3.7.0
+
 *  Django version: 2.1.7
 
-*  Npm version: 6.8.0
+
+
 
 
 
